@@ -11,7 +11,7 @@
   };
   const pageUrl = (path) => {
     const target = new URL(path, base);
-    target.searchParams.set("v", "20261116-index3");
+    target.searchParams.set("v", "20261116-index4");
     return target.href;
   };
 
@@ -136,8 +136,13 @@
       const items = summaryResult.value;
       const pager = main.querySelector("#timeline-pager");
       let currentPage = 0;
+      let previousPageSize = null;
       function renderTimeline() {
         const pageSize = window.innerWidth <= 650 ? 2 : window.innerHeight < 700 ? 3 : 4;
+        if (previousPageSize !== null && previousPageSize !== pageSize) {
+          currentPage = Math.floor(currentPage * previousPageSize / pageSize);
+        }
+        previousPageSize = pageSize;
         const totalPages = Math.max(1, Math.ceil(items.length / pageSize));
         currentPage = Math.min(currentPage, totalPages - 1);
         timeline.replaceChildren();
