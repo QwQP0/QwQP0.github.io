@@ -68,7 +68,7 @@
     "tags": ["CTF", "Jeopardy"],
     "highlight": true,
     "achv": [
-      {"desc": "Quals", "rank": "4위", "date": "2026.08.09"}
+      {"desc": "Quals", "rank": "4위", "date": "2026.08.09"},
       {"desc": "Final", "rank": "10위", "date": "2026.08.18"}
     ]
   },
