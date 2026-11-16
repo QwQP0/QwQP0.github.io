@@ -11,7 +11,7 @@
   };
   const pageUrl = (path) => {
     const target = new URL(path, base);
-    target.searchParams.set("v", "20261116-accent1");
+    target.searchParams.set("v", "20261116-dotname1");
     return target.href;
   };
 
