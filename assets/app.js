@@ -11,7 +11,7 @@
   };
   const pageUrl = (path) => {
     const target = new URL(path, base);
-    target.searchParams.set("v", "20261116-dots1");
+    target.searchParams.set("v", "20261116-samples1");
     return target.href;
   };
 
@@ -63,6 +63,10 @@
     return response.json();
   }
 
+  function descriptionText(value) {
+    return typeof value === "string" ? value : String(value?.desc || "");
+  }
+
   function shell() {
     const nav = [
       ["home", "HOME", "index/"],
@@ -75,7 +79,7 @@
       <div class="ambient ambient-two" aria-hidden="true"></div>
       <div class="site-shell">
         <header class="site-header">
-          <a class="brand" href="${pageUrl("index/")}" aria-label="QwQ 홈"><span class="brand-mark"><img src="${url("profile.png")}" alt=""></span><span class="brand-copy">QwQ<span class="brand-sub">/ SECURITY NOTES</span></span></a>
+          <a class="brand" href="${pageUrl("index/")}" aria-label="QwQ 홈"><span class="brand-mark"><img src="${url("profile.png")}" alt=""></span><span class="brand-copy">QwQ<span class="brand-sub"></span></span></a>
           <nav class="nav" aria-label="주 메뉴"></nav>
           <span class="header-status"><span class="status-light"></span> ONLINE</span>
         </header>
@@ -109,7 +113,7 @@
     return Number(parts[1]) * 10000 + Number(parts[2] || 0) * 100 + Number(parts[3] || 0);
   }
 
-  async function home(main) {
+  async function home(main, descPromise) {
     main.classList.add("home-main");
     main.innerHTML = `
       <section class="home-panel" aria-labelledby="home-title">
@@ -130,12 +134,10 @@
       profile.parentElement.append(fallback);
     });
 
-    const [descResult, summaryResult] = await Promise.allSettled([loadJson("desc.json"), loadJson("summary.json")]);
+    const [descResult, summaryResult] = await Promise.allSettled([descPromise, loadJson("summary.json")]);
     const description = main.querySelector("#description");
     if (descResult.status === "fulfilled") {
-      const value = descResult.value;
-      const content = typeof value === "string" ? value : String(value?.desc || "");
-      appendLinkedText(description, content);
+      appendLinkedText(description, descriptionText(descResult.value));
     } else description.append(errorNotice("자기소개를 불러오지 못했습니다. desc.json을 확인해 주세요."));
 
     const timeline = main.querySelector("#timeline");
@@ -166,7 +168,7 @@
     return heading;
   }
 
-  function projectCard(name, project, detailLabel) {
+  function projectCard(name, project) {
     const card = el("article", "project-card");
     if (project.highlight === true) card.classList.add("highlight");
     const trigger = el("div", "project-trigger");
@@ -189,7 +191,6 @@
     detail.id = detailId;
     detail.hidden = true;
     if (rest.length) {
-      detail.append(el("span", "small-label", detailLabel));
       const body = el("p", "project-detail-text");
       appendLinkedText(body, rest.join("\n"));
       detail.append(body);
@@ -234,7 +235,6 @@
     heading.append(el("span", "project-arrow achievement-arrow", "↗"));
     trigger.append(heading, preview);
     if (rest.length) {
-      detail.append(el("span", "small-label", "MORE ABOUT THIS ACHIEVEMENT"));
       const body = el("p", "project-detail-text");
       appendLinkedText(body, rest.join("\n"));
       detail.append(body);
@@ -279,10 +279,10 @@
   async function projectListing(main, kind) {
     const config = kind === "achievements" ? {
       title: "Achievements", intro: "기록할 만한 성과를 모아 둡니다.", label: "성과",
-      file: "achievements.json", detailLabel: "MORE ABOUT THIS ACHIEVEMENT"
+      file: "achievements.json"
     } : {
       title: "Projects", intro: "공부하며 진행한 프로젝트를 정리합니다.", label: "프로젝트",
-      file: "projects.json", detailLabel: "MORE ABOUT THIS PROJECT"
+      file: "projects.json"
     };
     main.classList.add("content-main");
     main.innerHTML = `
@@ -302,7 +302,7 @@
     const list = main.querySelector("#project-list");
     const cards = entries.map(([name, entry]) => kind === "achievements"
       ? achievementCard(name, entry || {})
-      : projectCard(name, entry || {}, config.detailLabel));
+      : projectCard(name, entry || {}));
     cards.forEach(({ card }) => list.append(card));
     if (!cards.length) list.append(el("p", "empty-note", `등록된 ${config.label}가 없습니다.`));
 
@@ -410,7 +410,11 @@
   }
 
   const main = shell();
+  const descPromise = loadJson("desc.json");
+  descPromise.then((value) => {
+    root.querySelector(".brand-sub").textContent = descriptionText(value).replace(/\s+/g, " ").trim();
+  }).catch(() => {});
   if (page === "projects" || page === "achievements") projectListing(main, page);
   else if (page === "contact") contact(main);
-  else home(main);
+  else home(main, descPromise);
 })();
