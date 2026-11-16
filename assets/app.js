@@ -93,32 +93,22 @@
   }
 
   async function home(main) {
+    main.classList.add("home-main");
     main.innerHTML = `
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-grid" aria-hidden="true"></div>
-        <div class="hero-orbit orbit-a" aria-hidden="true"></div>
-        <div class="hero-orbit orbit-b" aria-hidden="true"></div>
-        <div class="hero-content">
-          <p class="eyebrow"><span class="eyebrow-line"></span> SECURITY NOTES <span class="eyebrow-index">001 / 003</span></p>
-          <h1 id="hero-title">Learn.<br><em>Verify.</em></h1>
-          <p class="hero-korean">정보보안을 공부하는 학생 QwQ의 기록.</p>
-          <a class="primary-button" href="${url("projects/")}">프로젝트 보기 <span aria-hidden="true">↗</span></a>
+      <section class="home-panel" aria-labelledby="home-title">
+        <div class="home-portrait profile-frame">
+          <div class="profile-corner top-left" aria-hidden="true"></div><div class="profile-corner bottom-right" aria-hidden="true"></div>
+          <img class="profile-image" src="${url("profile.png")}" alt="QwQ 프로필 사진">
         </div>
-        <div class="hero-side" aria-hidden="true">SCROLL TO EXPLORE <span>↓</span></div>
-        <div class="hero-bottom" aria-hidden="true"><span>QwQ / ARCHIVE</span><span>LEARNING IN PROGRESS</span></div>
-      </section>
-      <section class="section about-section" aria-labelledby="about-title">
-        <div class="section-heading"><span class="section-number">01 / ABOUT</span><h2 id="about-title">QwQ입니다<span class="accent">.</span></h2><p>ABOUT ME</p></div>
-        <div class="about-grid">
-          <div class="profile-frame"><div class="profile-corner top-left"></div><div class="profile-corner bottom-right"></div><img class="profile-image" src="${url("profile.png")}" alt="QwQ 프로필 사진"><span class="profile-label">PROFILE_01</span></div>
-          <div class="about-copy"><p class="small-label">A LITTLE INTRODUCTION</p><div id="description" class="description"></div><a class="text-link" href="${url("contact/")}">연락처 보기 <span aria-hidden="true">↗</span></a></div>
+        <div class="home-content">
+          <header class="home-heading"><p class="small-label">SECURITY STUDENT / QwQ</p><h1 id="home-title">QwQ<span class="accent">.</span></h1><p>정보보안을 공부하는 학생</p></header>
+          <section class="home-description" aria-label="자기소개"><span class="small-label">ABOUT ME</span><div id="description" class="description"></div></section>
+          <section class="home-history" aria-labelledby="timeline-title">
+            <div class="home-history-heading"><div><span class="small-label">HISTORY</span><h2 id="timeline-title">이력<span class="accent">.</span></h2></div><div id="timeline-pager" class="timeline-pager" aria-label="이력 페이지"></div></div>
+            <div id="timeline" class="timeline"></div>
+          </section>
         </div>
-      </section>
-      <section class="section timeline-section" aria-labelledby="timeline-title">
-        <div class="section-heading"><span class="section-number">02 / TIMELINE</span><h2 id="timeline-title">지나온 길<span class="accent">.</span></h2><p>EXPERIENCE & MILESTONES</p></div>
-        <div id="timeline" class="timeline"></div>
-      </section>
-      <section class="closing"><div><span class="small-label">LET'S CONNECT</span><h2>보안과 프로젝트에 관해<br>이야기하고 싶다면<span class="accent">.</span></h2></div><a class="primary-button" href="${url("contact/")}">연락하기 <span aria-hidden="true">↗</span></a></section>`;
+      </section>`;
 
     const profile = main.querySelector(".profile-image");
     profile.addEventListener("error", () => {
@@ -137,16 +127,45 @@
 
     const timeline = main.querySelector("#timeline");
     if (summaryResult.status === "fulfilled" && Array.isArray(summaryResult.value)) {
-      if (!summaryResult.value.length) timeline.append(el("p", "empty-note", "등록된 이력이 없습니다."));
-      summaryResult.value.forEach((item, index) => {
-        const row = el("article", "timeline-row");
-        row.append(el("span", "timeline-index", String(index + 1).padStart(2, "0")));
-        row.append(el("time", "timeline-date", dateRange(item.start, item.end)));
-        const desc = el("p", "timeline-desc");
-        appendLinkedText(desc, item.desc);
-        row.append(desc);
-        timeline.append(row);
-      });
+      const items = summaryResult.value;
+      const pager = main.querySelector("#timeline-pager");
+      let currentPage = 0;
+      function renderTimeline() {
+        const pageSize = window.innerWidth <= 650 ? 2 : window.innerHeight < 700 ? 3 : 4;
+        const totalPages = Math.max(1, Math.ceil(items.length / pageSize));
+        currentPage = Math.min(currentPage, totalPages - 1);
+        timeline.replaceChildren();
+        pager.replaceChildren();
+        if (!items.length) {
+          timeline.append(el("p", "home-empty", "등록된 이력이 없습니다."));
+          return;
+        }
+        items.slice(currentPage * pageSize, (currentPage + 1) * pageSize).forEach((item, offset) => {
+          const row = el("article", "timeline-row");
+          row.append(el("span", "timeline-index", String(currentPage * pageSize + offset + 1).padStart(2, "0")));
+          row.append(el("time", "timeline-date", dateRange(item.start, item.end)));
+          const desc = el("p", "timeline-desc");
+          appendLinkedText(desc, item.desc);
+          row.append(desc);
+          timeline.append(row);
+        });
+        if (totalPages > 1) {
+          const previous = el("button", "pager-button", "←");
+          previous.type = "button";
+          previous.setAttribute("aria-label", "이전 이력 페이지");
+          previous.disabled = currentPage === 0;
+          previous.addEventListener("click", () => { currentPage--; renderTimeline(); });
+          const indicator = el("span", "pager-indicator", `${String(currentPage + 1).padStart(2, "0")} / ${String(totalPages).padStart(2, "0")}`);
+          const next = el("button", "pager-button", "→");
+          next.type = "button";
+          next.setAttribute("aria-label", "다음 이력 페이지");
+          next.disabled = currentPage === totalPages - 1;
+          next.addEventListener("click", () => { currentPage++; renderTimeline(); });
+          pager.append(previous, indicator, next);
+        }
+      }
+      renderTimeline();
+      window.addEventListener("resize", renderTimeline);
     } else timeline.append(errorNotice("이력을 불러오지 못했습니다. summary.json을 확인해 주세요."));
   }
 
