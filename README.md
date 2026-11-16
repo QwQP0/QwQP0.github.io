@@ -37,6 +37,21 @@ GitHub Pages용 정적 사이트입니다. 빌드 과정이나 외부 서비스 
 
 현재 이력과 프로젝트 데이터는 구조를 보여 주는 예시입니다. 실제 내용을 입력한 뒤 공개하세요. 성과 데이터는 비어 있으며, GitHub 링크 외의 연락처도 아직 비어 있습니다.
 
+연락처 아이콘은 `contact.json`의 URL에서 불러와 자동으로 테마의 청록색에 맞춥니다. 투명 배경 SVG나 PNG를 권장합니다. 원래 색을 유지하려면 `"tint": false`를 추가하세요. `label`과 `category`를 쓰면 새 서비스의 표시 이름과 작은 분류 문구도 JSON에서 정할 수 있습니다. 아이콘 URL이 작동하지 않으면 서비스 이름의 앞 두 글자를 표시합니다.
+
+```json
+{
+  "mastodon": {
+    "icon": "https://cdn.simpleicons.org/mastodon",
+    "link": "https://mastodon.social/@example",
+    "label": "Mastodon",
+    "category": "SOCIAL"
+  }
+}
+```
+
+현재 Instagram·GitHub·Gmail 아이콘은 [Simple Icons](https://simpleicons.org/)에서, BOJ·CTFtime의 범용 코드·깃발 아이콘은 [Lucide](https://lucide.dev/)에서 불러옵니다. 새 아이콘도 각 사이트의 SVG 주소를 `icon`에 넣으면 됩니다.
+
 ## GitHub Pages
 
 GitHub 계정과 저장소 이름은 `QwQP0`이고, 블로그에 표시하는 닉네임은 `QwQ`입니다. GitHub Pages는 **Deploy from a branch → main → /(root)**로 설정되어 있습니다. 배포 주소는 [https://qwqp0.github.io/](https://qwqp0.github.io/)입니다. `/index/`, `/projects/`, `/achievements/`, `/contact/`를 사용할 수 있으며 `/project/`도 프로젝트 페이지로 열립니다.

@@ -1,7 +1,7 @@
 {
-  "instagram": { "icon": "assets/icons/instagram.svg", "link": "" },
-  "github": { "icon": "assets/icons/github.svg", "link": "https://github.com/QwQP0" },
-  "gmail": { "icon": "assets/icons/gmail.svg", "link": "" },
-  "boj": { "icon": "assets/icons/boj.svg", "link": "" },
-  "ctftime": { "icon": "assets/icons/ctftime.svg", "link": "" }
+  "instagram": { "icon": "https://cdn.simpleicons.org/instagram", "link": "" },
+  "github": { "icon": "https://cdn.simpleicons.org/github", "link": "https://github.com/QwQP0" },
+  "gmail": { "icon": "https://cdn.simpleicons.org/gmail", "link": "" },
+  "boj": { "icon": "https://cdn.jsdelivr.net/npm/lucide-static@1.73.0/icons/code-xml.svg", "link": "" },
+  "ctftime": { "icon": "https://cdn.jsdelivr.net/npm/lucide-static@1.73.0/icons/flag-triangle-right.svg", "link": "" }
 }

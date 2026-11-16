@@ -134,6 +134,7 @@ a.contact-card:hover{transform:translateY(-3px);border-color:var(--cyan);backgro
 .contact-card.disabled{opacity:.55;cursor:default}
 .contact-icon{width:52px;height:52px;flex:none;display:grid;place-items:center;border:1px solid var(--line-bright);background:rgba(112,242,227,.06)}
 .contact-icon img{width:28px;height:28px;object-fit:contain}
+.contact-icon img.themed{filter:brightness(0) saturate(100%) invert(85%) sepia(29%) saturate(746%) hue-rotate(111deg) brightness(104%) contrast(95%)}
 .contact-initial{color:var(--cyan);font:15px var(--mono)}
 .contact-text{display:flex;flex-direction:column;gap:6px;flex:1}
 .contact-hint{color:var(--cyan);font:10px var(--mono);letter-spacing:.11em}

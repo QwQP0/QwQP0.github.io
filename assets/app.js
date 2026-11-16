@@ -11,7 +11,7 @@
   };
   const pageUrl = (path) => {
     const target = new URL(path, base);
-    target.searchParams.set("v", "20261116-achievements2");
+    target.searchParams.set("v", "20261116-icons1");
     return target.href;
   };
 
@@ -393,11 +393,14 @@
         const image = el("img");
         image.src = /^https?:\/\//i.test(icon) ? icon : url(icon.replace(/^\/+/, ""));
         image.alt = "";
+        image.className = item.tint === false ? "original" : "themed";
+        image.loading = "lazy";
+        image.decoding = "async";
         image.addEventListener("error", () => { image.remove(); iconWrap.append(el("span", "contact-initial", key.slice(0, 2).toUpperCase())); });
         iconWrap.append(image);
       } else iconWrap.append(el("span", "contact-initial", key.slice(0, 2).toUpperCase()));
       const text = el("span", "contact-text");
-      text.append(el("span", "contact-hint", hints[key.toLowerCase()] || "LINK"), el("strong", "", labels[key.toLowerCase()] || key));
+      text.append(el("span", "contact-hint", item.category || hints[key.toLowerCase()] || "LINK"), el("strong", "", item.label || labels[key.toLowerCase()] || key));
       card.append(iconWrap, text, el("span", "contact-action", href ? "↗" : "—"));
       if (!href) card.title = "contact.json에 링크를 입력하면 활성화됩니다.";
       list.append(card);
