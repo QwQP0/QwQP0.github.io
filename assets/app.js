@@ -11,7 +11,7 @@
   };
   const pageUrl = (path) => {
     const target = new URL(path, base);
-    target.searchParams.set("v", "20261116-pages8");
+    target.searchParams.set("v", "20261116-achievements1");
     return target.href;
   };
 
@@ -67,6 +67,7 @@
     const nav = [
       ["home", "HOME", "index/"],
       ["projects", "PROJECTS", "projects/"],
+      ["achievements", "ACHIEVEMENTS", "achievements/"],
       ["contact", "CONTACT", "contact/"]
     ];
     root.innerHTML = `
@@ -152,7 +153,7 @@
     } else timeline.append(errorNotice("이력을 불러오지 못했습니다. summary.json을 확인해 주세요."));
   }
 
-  function projectCard(name, project) {
+  function projectCard(name, project, detailLabel) {
     const card = el("article", "project-card");
     const trigger = el("div", "project-trigger");
     trigger.setAttribute("role", "button");
@@ -176,7 +177,7 @@
     detail.id = detailId;
     detail.hidden = true;
     if (rest.length) {
-      detail.append(el("span", "small-label", "MORE ABOUT THIS PROJECT"));
+      detail.append(el("span", "small-label", detailLabel));
       const body = el("p", "project-detail-text");
       appendLinkedText(body, rest.join("\n"));
       detail.append(body);
@@ -199,30 +200,38 @@
     return { card, tags: cleanTags };
   }
 
-  async function projects(main) {
+  async function projectListing(main, kind) {
+    const config = kind === "achievements" ? {
+      title: "Achievements", intro: "기록할 만한 성과를 모아 둡니다.", label: "성과",
+      file: "achievements.json", detailLabel: "MORE ABOUT THIS ACHIEVEMENT"
+    } : {
+      title: "Projects", intro: "공부하며 진행한 프로젝트를 정리합니다.", label: "프로젝트",
+      file: "projects.json", detailLabel: "MORE ABOUT THIS PROJECT"
+    };
     main.classList.add("content-main");
     main.innerHTML = `
-      <section class="content-intro" aria-labelledby="projects-title"><h1 id="projects-title">Projects<span class="accent">.</span></h1><p>공부하며 진행한 프로젝트를 정리합니다.</p></section>
-      <section class="content-section projects-section" aria-label="프로젝트 목록">
-        <div class="project-toolbar"><p class="toolbar-title"><strong id="project-count">0</strong>개의 프로젝트</p><div class="filter-wrap"><button id="filter-button" class="filter-button" type="button" aria-expanded="false" aria-controls="filter-panel">태그 필터 <span id="filter-count"></span><span aria-hidden="true" class="filter-chevron">⌄</span></button><div id="filter-panel" class="filter-panel" hidden><label class="filter-search-label" for="tag-search">태그 검색</label><input id="tag-search" type="search" placeholder="태그 찾기" autocomplete="off"><div id="tag-options" class="tag-options"></div><p class="filter-help">여러 태그를 선택하면 하나라도 포함된 프로젝트가 표시됩니다.</p></div></div></div>
-        <div id="active-filters" class="active-filters" aria-live="polite"></div><div id="project-list" class="project-list"></div><p id="no-results" class="empty-note" hidden>선택한 태그에 해당하는 프로젝트가 없습니다.</p>
+      <section class="content-intro" aria-labelledby="listing-title"><h1 id="listing-title">${config.title}<span class="accent">.</span></h1><p>${config.intro}</p></section>
+      <section class="content-section projects-section" aria-label="${config.label} 목록">
+        <div class="project-toolbar"><p class="toolbar-title"><strong id="project-count">0</strong>개의 ${config.label}</p><div class="filter-wrap"><button id="filter-button" class="filter-button" type="button" aria-expanded="false" aria-controls="filter-panel">태그 필터 <span id="filter-count"></span><span aria-hidden="true" class="filter-chevron">⌄</span></button><div id="filter-panel" class="filter-panel" hidden><label class="filter-search-label" for="tag-search">태그 검색</label><input id="tag-search" type="search" placeholder="태그 찾기" autocomplete="off"><div id="tag-options" class="tag-options"></div><p class="filter-help">여러 태그를 선택하면 하나라도 포함된 ${config.label}가 표시됩니다.</p></div></div></div>
+        <div id="active-filters" class="active-filters" aria-live="polite"></div><div id="project-list" class="project-list"></div><p id="no-results" class="empty-note" hidden>선택한 태그에 해당하는 ${config.label}가 없습니다.</p>
       </section>`;
     let data;
-    try { data = await loadJson("projects.json"); }
-    catch { main.querySelector("#project-list").append(errorNotice("프로젝트를 불러오지 못했습니다. projects.json을 확인해 주세요.")); return; }
+    try { data = await loadJson(config.file); }
+    catch { main.querySelector("#project-list").append(errorNotice(`${config.label}를 불러오지 못했습니다. ${config.file}을 확인해 주세요.`)); return; }
     if (!data || typeof data !== "object" || Array.isArray(data)) {
-      main.querySelector("#project-list").append(errorNotice("projects.json은 프로젝트 이름을 키로 갖는 객체여야 합니다."));
+      main.querySelector("#project-list").append(errorNotice(`${config.file}은 ${config.label} 이름을 키로 갖는 객체여야 합니다.`));
       return;
     }
     const entries = Object.entries(data);
     const list = main.querySelector("#project-list");
-    const cards = entries.map(([name, project]) => projectCard(name, project || {}));
+    const cards = entries.map(([name, project]) => projectCard(name, project || {}, config.detailLabel));
     cards.forEach(({ card }) => list.append(card));
-    if (!cards.length) list.append(el("p", "empty-note", "등록된 프로젝트가 없습니다."));
+    if (!cards.length) list.append(el("p", "empty-note", `등록된 ${config.label}가 없습니다.`));
 
     const uniqueTags = [...new Set(cards.flatMap(({ tags }) => tags))].sort((a, b) => a.localeCompare(b, "ko"));
     const selected = new Set();
     const filterButton = main.querySelector("#filter-button");
+    filterButton.disabled = uniqueTags.length === 0;
     const filterPanel = main.querySelector("#filter-panel");
     const tagSearch = main.querySelector("#tag-search");
     const tagOptions = main.querySelector("#tag-options");
@@ -320,7 +329,7 @@
   }
 
   const main = shell();
-  if (page === "projects") projects(main);
+  if (page === "projects" || page === "achievements") projectListing(main, page);
   else if (page === "contact") contact(main);
   else home(main);
 })();
