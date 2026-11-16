@@ -214,3 +214,11 @@ html[data-page=projects] .project-title::before,html[data-page=achievements] .pr
 .content-main .contact-card{min-height:124px;background:rgba(13,30,38,.7)}
 @media(max-width:650px){.content-main{padding:56px 0 80px}.content-intro{padding-bottom:30px;margin-bottom:26px}.content-intro h1{font-size:clamp(55px,14vw,70px)}.content-intro p{font-size:14px;margin-top:13px}.content-main .project-toolbar{align-items:center;padding-right:12px}.content-main .toolbar-title{font-size:12px}.content-main .toolbar-title strong{font-size:23px}.content-main .project-trigger{height:132px;padding:11px 12px 15px}.content-main .project-heading-row{gap:6px}.content-main .project-heading-row .project-title{font-size:16px;max-width:65%}.content-main .tag{font-size:9px;padding:4px 5px}.content-main .project-detail{padding:14px 12px 20px}.content-main .achievement-row{grid-template-columns:minmax(0,1fr) 106px;gap:8px;padding:8px 12px}.content-main .achievement-info{min-height:104px}.content-main .achievement-info .project-arrow{font-size:16px}.content-main .achievement-tiles{max-width:106px}.content-main .achievement-tile{flex-basis:104px;width:104px;height:104px;padding:8px}.content-main .achievement-tile-value{font-size:30px}.content-main .achievement-tile-date{font-size:9px}.content-main .contact-card{min-height:98px}}
 @media(max-width:650px){html[data-page=achievements] .content-intro h1{font-size:clamp(40px,11vw,70px)}}
+@media(max-width:650px){
+  .content-main .project-trigger{height:auto;min-height:132px;overflow:visible}
+  .content-main .project-heading-row{flex-wrap:wrap;row-gap:4px}
+  .content-main .project-heading-row .project-title{flex:0 0 auto;max-width:100%;line-height:1.35;white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere}
+  .content-main .project-heading-row .project-tags,.content-main .achievement-info .project-tags{flex:0 0 auto;max-width:100%;flex-wrap:wrap;overflow:visible}
+  .content-main .project-preview{white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere}
+  .content-main .tag{max-width:100%;white-space:normal;overflow-wrap:anywhere}
+}
