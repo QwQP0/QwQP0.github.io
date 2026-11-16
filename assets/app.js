@@ -4,6 +4,16 @@
   const base = new URL(document.documentElement.dataset.base || "./", location.href);
   const root = document.getElementById("app");
   const url = (path) => new URL(path, base).href;
+  const freshUrl = (path) => {
+    const target = new URL(path, base);
+    target.searchParams.set("t", Date.now().toString());
+    return target.href;
+  };
+  const pageUrl = (path) => {
+    const target = new URL(path, base);
+    target.searchParams.set("v", "20261116-index2");
+    return target.href;
+  };
 
   const el = (tag, className, text) => {
     const node = document.createElement(tag);
@@ -48,14 +58,14 @@
   }
 
   async function loadJson(file) {
-    const response = await fetch(url(file), { cache: "no-cache" });
+    const response = await fetch(freshUrl(file), { cache: "no-store" });
     if (!response.ok) throw new Error(`${file}: HTTP ${response.status}`);
     return response.json();
   }
 
   function shell() {
     const nav = [
-      ["home", "HOME", ""],
+      ["home", "HOME", "index/"],
       ["projects", "PROJECTS", "projects/"],
       ["contact", "CONTACT", "contact/"]
     ];
@@ -64,7 +74,7 @@
       <div class="ambient ambient-two" aria-hidden="true"></div>
       <div class="site-shell">
         <header class="site-header">
-          <a class="brand" href="${url("")}" aria-label="QwQ 홈"><span class="brand-mark">Q<span class="brand-dot">.</span></span><span class="brand-copy">QwQ<span class="brand-sub">/ SECURITY NOTES</span></span></a>
+          <a class="brand" href="${pageUrl("index/")}" aria-label="QwQ 홈"><span class="brand-mark">Q<span class="brand-dot">.</span></span><span class="brand-copy">QwQ<span class="brand-sub">/ SECURITY NOTES</span></span></a>
           <nav class="nav" aria-label="주 메뉴"></nav>
           <span class="header-status"><span class="status-light"></span> ONLINE</span>
         </header>
@@ -74,7 +84,7 @@
     const navNode = root.querySelector(".nav");
     for (const [key, label, path] of nav) {
       const a = el("a", key === page ? "nav-link active" : "nav-link", label);
-      a.href = url(path);
+      a.href = pageUrl(path);
       if (key === page) a.setAttribute("aria-current", "page");
       navNode.append(a);
     }
@@ -98,7 +108,7 @@
       <section class="home-panel" aria-labelledby="home-title">
         <div class="home-portrait profile-frame">
           <div class="profile-corner top-left" aria-hidden="true"></div><div class="profile-corner bottom-right" aria-hidden="true"></div>
-          <img class="profile-image" src="${url("profile.png")}" alt="QwQ 프로필 사진">
+          <img class="profile-image" src="${freshUrl("profile.png")}" alt="QwQ 프로필 사진">
         </div>
         <div class="home-content">
           <header class="home-heading"><p class="small-label">SECURITY STUDENT / QwQ</p><h1 id="home-title">QwQ<span class="accent">.</span></h1><p>정보보안을 공부하는 학생</p></header>
