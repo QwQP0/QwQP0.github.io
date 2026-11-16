@@ -11,7 +11,7 @@
   };
   const pageUrl = (path) => {
     const target = new URL(path, base);
-    target.searchParams.set("v", "20261116-pages7");
+    target.searchParams.set("v", "20261116-pages8");
     return target.href;
   };
 
@@ -79,7 +79,7 @@
           <span class="header-status"><span class="status-light"></span> ONLINE</span>
         </header>
         <main id="main-content"></main>
-        <footer class="site-footer"><span>© <span id="year"></span> QwQ</span><span>LEARNING SECURITY, ONE NOTE AT A TIME <span class="footer-star">✦</span></span></footer>
+        <footer class="site-footer"><span>© <span id="year"></span> QwQ</span></footer>
       </div>`;
     const navNode = root.querySelector(".nav");
     for (const [key, label, path] of nav) {
