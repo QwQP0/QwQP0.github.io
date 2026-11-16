@@ -11,7 +11,7 @@
   };
   const pageUrl = (path) => {
     const target = new URL(path, base);
-    target.searchParams.set("v", "20261116-mobilewrap1");
+    target.searchParams.set("v", "20261117-achstatic1");
     return target.href;
   };
 
@@ -217,40 +217,14 @@
     const card = el("article", "project-card achievement-card");
     if (achievement.highlight === true) card.classList.add("highlight");
     const row = el("div", "achievement-row");
-    const trigger = el("div", "achievement-info");
-    trigger.setAttribute("role", "button");
-    trigger.tabIndex = 0;
-    trigger.setAttribute("aria-expanded", "false");
-    const detail = el("div", "project-detail achievement-detail");
-    detail.id = `achievement-detail-${Math.random().toString(36).slice(2)}`;
-    detail.hidden = true;
-    trigger.setAttribute("aria-controls", detail.id);
+    const info = el("div", "achievement-info");
 
     const tags = entryTags(achievement);
     const text = String(achievement.desc || "");
-    const [firstLine, ...rest] = text.split(/\r?\n/);
-    const preview = el("p", "project-preview");
-    appendLinkedText(preview, firstLine);
+    const preview = el("p", "project-preview achievement-description");
+    appendLinkedText(preview, text);
     const heading = headingWithTags(name, tags);
-    heading.append(el("span", "project-arrow achievement-arrow", "↗"));
-    trigger.append(heading, preview);
-    if (rest.length) {
-      const body = el("p", "project-detail-text");
-      appendLinkedText(body, rest.join("\n"));
-      detail.append(body);
-    } else detail.append(el("p", "project-detail-text", "추가 설명이 없습니다."));
-    const toggle = () => {
-      const open = trigger.getAttribute("aria-expanded") === "true";
-      trigger.setAttribute("aria-expanded", String(!open));
-      detail.hidden = open;
-    };
-    trigger.addEventListener("click", (event) => { if (!event.target.closest("a")) toggle(); });
-    trigger.addEventListener("keydown", (event) => {
-      if ((event.key === "Enter" || event.key === " ") && !event.target.closest("a")) {
-        event.preventDefault();
-        toggle();
-      }
-    });
+    info.append(heading, preview);
 
     const tiles = el("div", "achievement-tiles");
     const records = Array.isArray(achievement.achv) ? achievement.achv : [];
@@ -271,8 +245,8 @@
       tile.append(el("span", "achievement-tile-desc", description), value, date);
       tiles.append(tile);
     });
-    row.append(trigger, tiles);
-    card.append(row, detail);
+    row.append(info, tiles);
+    card.append(row);
     return { card, tags };
   }
 
