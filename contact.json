@@ -4,6 +4,6 @@
   "qwqprg0@gmail.com": { "icon": "https://cdn.simpleicons.org/gmail/70f2e3", "link": "", "category": "Gmail", "tint": false },
   "fjghadgjl": { "icon": "https://api.iconify.design/lucide/code-xml.svg?color=%2370f2e3", "link": "https://solved.ac/u/fjghadgjl", "category": "Baekjoon Online Judge", "tint": false },
   "QwQ_": { "icon": "https://api.iconify.design/lucide/flag-triangle-right.svg?color=%2370f2e3", "link": "https://ctftime.org/team/451368", "category": "CTFtime", "tint": false },
-  "qwql": { "icon": "", "link": "https://velog.io/@qwql/posts", "category": "Velog", "tint": false },
-  "alpha3995": { "icon": "", "link": "", "category": "Discord", "tint": false },
+  "qwql": { "icon": "https://cdn.simpleicons.org/velog/70f2e3", "link": "https://velog.io/@qwql/posts", "category": "Velog", "tint": false },
+  "alpha3995": { "icon": "https://cdn.simpleicons.org/discord/70f2e3", "link": "", "category": "Discord", "tint": false }
 }
