@@ -180,7 +180,9 @@ html[data-page=home] .site-shell{height:100%;display:flex;flex-direction:column}
 .content-main .toolbar-title strong{margin-right:7px;color:var(--cyan);font-size:27px;vertical-align:-2px}
 .content-main .project-list{gap:0;border-bottom:1px solid var(--line)}
 .content-main .project-card{border:0;border-top:1px solid var(--line);background:transparent}
-.content-main .project-card.highlight{position:relative;z-index:1;outline:1px solid var(--cyan);outline-offset:-1px;box-shadow:0 0 18px rgba(112,242,227,.13)}
+.content-main .project-card.highlight{position:relative;z-index:1;margin:8px 0;outline:1px solid var(--cyan);outline-offset:-1px;box-shadow:0 0 18px rgba(112,242,227,.13);background:linear-gradient(90deg,rgba(112,242,227,.08),rgba(112,242,227,.015) 48%,transparent)}
+.content-main .project-card.highlight::before{content:"";position:absolute;left:0;top:16px;bottom:16px;width:3px;background:var(--cyan);box-shadow:0 0 14px rgba(112,242,227,.5);pointer-events:none}
+.content-main .project-card.highlight .project-heading-row::before{content:"";display:block;flex:none;width:7px;height:7px;background:var(--pink);transform:rotate(45deg);box-shadow:0 0 10px rgba(255,114,185,.55)}
 .content-main .project-card:hover,.content-main .project-card:has(.project-trigger[aria-expanded=true]){background:rgba(112,242,227,.045)}
 .content-main .project-trigger{height:122px;padding:11px 8px 15px;justify-content:center}
 .content-main .project-heading-row{display:flex;align-items:center;gap:12px;min-width:0;margin-top:5px}
