@@ -75,7 +75,6 @@ h1,h2,p{margin-top:0}
 .timeline{border-top:1px solid var(--line)}
 .timeline-row{display:grid;grid-template-columns:70px 230px 1fr;align-items:start;gap:20px;padding:24px 10px;border-bottom:1px solid var(--line);transition:background .2s}
 .timeline-row:hover{background:rgba(112,242,227,.035)}
-.timeline-index{color:#557881;font:11px var(--mono)}
 .timeline-date{color:var(--cyan);font:12px var(--mono);letter-spacing:.02em}
 .timeline-desc{margin:0;color:#d6e4e3;font-size:14px;line-height:1.8;white-space:pre-wrap}
 .closing{display:flex;align-items:end;justify-content:space-between;gap:30px;padding:59px 4.4% 68px;margin:10px 4.4% 100px;border:1px solid var(--line-bright);background:radial-gradient(circle at 80% 80%,rgba(112,242,227,.11),transparent 34%),linear-gradient(110deg,rgba(13,35,43,.9),rgba(23,23,41,.7));position:relative}
@@ -146,32 +145,25 @@ a.contact-card:hover{transform:translateY(-3px);border-color:var(--cyan);backgro
 /* The index is a single-screen introduction. Other pages retain their own layouts. */
 html[data-page=home],html[data-page=home] body{height:100%;overflow:hidden}
 html[data-page=home] #app{height:100dvh;min-height:0;overflow:hidden}
-html[data-page=home] .site-shell{height:100%;display:flex;flex-direction:column}
+html[data-page=home] .site-shell{height:100%;max-width:1600px;padding:0 clamp(18px,2.5vw,42px);display:flex;flex-direction:column}
 html[data-page=home] .site-footer{display:none}
 .home-main{flex:1;min-height:0;display:flex;align-items:center;overflow:hidden}
-.home-panel{width:100%;max-height:100%;display:grid;grid-template-columns:minmax(230px,340px) minmax(0,1fr);gap:clamp(28px,6vw,85px);align-items:center;padding:clamp(16px,3vh,36px) 4.4%;background:radial-gradient(circle at 24% 50%,rgba(27,114,119,.13),transparent 38%),linear-gradient(115deg,rgba(6,19,27,.15),rgba(33,17,39,.08));border-bottom:1px solid var(--line)}
-.home-portrait.profile-frame{width:100%;height:min(58dvh,440px)}
-.home-content{min-width:0;display:flex;flex-direction:column;gap:clamp(15px,2.7vh,28px)}
-.home-heading .small-label{display:block;margin-bottom:9px}
-.home-heading h1{font-size:clamp(56px,6.8vw,92px);line-height:1;letter-spacing:-.085em;margin:0 0 10px;font-weight:800}
-.home-heading>p:last-child{font-size:clamp(13px,1.4vw,17px);color:#bbd3d2;letter-spacing:-.03em;margin:0}
-.home-description{border-left:2px solid var(--cyan);padding:2px 0 2px 20px}
-.home-description .small-label{display:block;margin-bottom:9px}
-.home-description .description{min-height:0;font-size:clamp(13px,1.35vw,17px);line-height:1.65;color:#d9e8e7}
+.home-panel{width:100%;max-height:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,390px);gap:clamp(42px,8vw,125px);align-items:center;padding:clamp(18px,3vh,36px) clamp(8px,2vw,28px);background:radial-gradient(circle at 76% 50%,rgba(27,114,119,.13),transparent 38%),linear-gradient(115deg,rgba(6,19,27,.15),rgba(33,17,39,.08));border-bottom:1px solid var(--line)}
+.home-portrait.profile-frame{width:100%;height:auto;aspect-ratio:1;justify-self:end}
+.home-content{min-width:0;display:flex;flex-direction:column;gap:clamp(34px,7vh,70px)}
+.home-heading h1{font-size:clamp(70px,7vw,106px);line-height:1;letter-spacing:-.085em;margin:0 0 16px;font-weight:800}
+.home-heading .description{min-height:0;font-size:clamp(16px,1.8vw,22px);line-height:1.55;color:#bbd3d2}
 .home-history{min-width:0}
-.home-history-heading{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:8px}
-.home-history-heading h2{font-size:25px;letter-spacing:-.06em;line-height:1.1;margin:6px 0 0}
 .home-history .timeline{border-top:1px solid var(--line)}
-.home-history .timeline-row{height:58px;display:grid;grid-template-columns:28px 155px minmax(0,1fr);align-items:center;gap:10px;padding:6px 0;overflow:hidden}
-.home-history .timeline-index{font-size:10px}
-.home-history .timeline-date{font-size:11px}
-.home-history .timeline-desc{font-size:12px;line-height:1.45;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;white-space:normal}
+.home-history .timeline-row{height:64px;display:grid;grid-template-columns:180px minmax(0,1fr);align-items:center;gap:22px;padding:6px 0;overflow:hidden}
+.home-history .timeline-date{font-size:12px}
+.home-history .timeline-desc{font-size:13px;line-height:1.45;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;white-space:normal}
 .home-empty{padding:16px 0;color:var(--muted);font-size:13px}
-.timeline-pager{display:flex;align-items:center;gap:9px}
+.timeline-pager{display:flex;justify-content:flex-end;align-items:center;gap:9px;margin-top:10px}
 .pager-button{width:27px;height:27px;border:1px solid var(--line-bright);background:rgba(112,242,227,.07);color:var(--cyan);font:15px var(--mono)}
 .pager-button:hover:not(:disabled){border-color:var(--cyan);background:rgba(112,242,227,.16)}
 .pager-button:disabled{opacity:.3;cursor:default}
 .pager-indicator{color:var(--muted);font:10px var(--mono);white-space:nowrap}
-@media(max-width:900px){.home-panel{grid-template-columns:minmax(190px,29%) minmax(0,1fr);gap:30px}.home-portrait.profile-frame{height:min(48dvh,340px)}.home-content{gap:15px}.home-history .timeline-row{grid-template-columns:25px 135px minmax(0,1fr)}}
-@media(max-width:650px){.home-panel{display:grid;grid-template-columns:106px minmax(0,1fr);grid-template-areas:'heading heading' 'portrait description' 'history history';gap:14px;align-content:center;align-items:center;padding:12px 3%}.home-content{display:contents}.home-heading{grid-area:heading}.home-heading .small-label{font-size:9px;margin-bottom:5px}.home-heading h1{font-size:48px;margin-bottom:4px}.home-heading>p:last-child{font-size:12px}.home-portrait.profile-frame{grid-area:portrait;height:132px;padding:6px}.home-portrait.profile-frame::after{inset:6px}.home-portrait .profile-fallback{inset:6px;font-size:55px}.home-description{grid-area:description;padding-left:11px}.home-description .small-label{font-size:9px;margin-bottom:5px}.home-description .description{font-size:12px;line-height:1.5}.home-history{grid-area:history}.home-history-heading{margin-bottom:5px}.home-history-heading .small-label{font-size:9px}.home-history-heading h2{font-size:20px;margin-top:3px}.home-history .timeline-row{height:62px;grid-template-columns:24px minmax(0,1fr);grid-template-rows:18px 1fr;align-items:start;gap:1px 8px;padding:7px 0}.home-history .timeline-index{grid-row:1/3}.home-history .timeline-date{grid-column:2;font-size:10px}.home-history .timeline-desc{grid-column:2;font-size:11px;line-height:1.4;-webkit-line-clamp:2}}
-@media(max-width:650px) and (max-height:600px){.home-panel{gap:8px;padding:7px 3%}.home-heading h1{font-size:39px}.home-heading>p:last-child{font-size:11px}.home-portrait.profile-frame{height:105px}.home-description .description{font-size:11px;line-height:1.4}.home-history .timeline-row{height:53px}.home-history-heading h2{font-size:17px}}
+@media(max-width:900px){.home-panel{grid-template-columns:minmax(0,1fr) minmax(210px,34%);gap:35px}.home-content{gap:36px}.home-history .timeline-row{grid-template-columns:135px minmax(0,1fr);gap:14px}}
+@media(max-width:650px){html[data-page=home] .site-shell{padding:0 18px}.home-panel{grid-template-columns:minmax(0,1fr) minmax(96px,38%);grid-template-areas:'heading portrait' 'history history';gap:20px;align-content:center;align-items:center;padding:12px 1%}.home-content{display:contents}.home-heading{grid-area:heading}.home-heading h1{font-size:clamp(42px,11vw,65px);margin-bottom:8px}.home-heading .description{font-size:13px;line-height:1.5}.home-portrait.profile-frame{grid-area:portrait;width:100%;height:auto;aspect-ratio:1;padding:6px}.home-portrait.profile-frame::after{inset:6px}.home-portrait .profile-fallback{inset:6px;font-size:55px}.home-history{grid-area:history}.home-history .timeline-row{height:62px;grid-template-columns:1fr;grid-template-rows:18px 1fr;align-items:start;gap:1px;padding:7px 0}.home-history .timeline-date{grid-column:1;grid-row:1;font-size:10px}.home-history .timeline-desc{grid-column:1;grid-row:2;font-size:11px;line-height:1.4;-webkit-line-clamp:2}}
+@media(max-width:650px) and (max-height:600px){.home-panel{gap:12px;padding:7px 1%}.home-heading h1{font-size:39px}.home-heading .description{font-size:11px;line-height:1.4}.home-portrait.profile-frame{max-width:115px}.home-history .timeline-row{height:53px}}

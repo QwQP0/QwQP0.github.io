@@ -11,7 +11,7 @@
   };
   const pageUrl = (path) => {
     const target = new URL(path, base);
-    target.searchParams.set("v", "20261116-index2");
+    target.searchParams.set("v", "20261116-index3");
     return target.href;
   };
 
@@ -106,17 +106,13 @@
     main.classList.add("home-main");
     main.innerHTML = `
       <section class="home-panel" aria-labelledby="home-title">
+        <div class="home-content">
+          <header class="home-heading"><h1 id="home-title">QwQ<span class="accent">.</span></h1><div id="description" class="description"></div></header>
+          <section class="home-history" aria-label="이력"><div id="timeline" class="timeline"></div><div id="timeline-pager" class="timeline-pager" aria-label="이력 페이지"></div></section>
+        </div>
         <div class="home-portrait profile-frame">
           <div class="profile-corner top-left" aria-hidden="true"></div><div class="profile-corner bottom-right" aria-hidden="true"></div>
           <img class="profile-image" src="${freshUrl("profile.png")}" alt="QwQ 프로필 사진">
-        </div>
-        <div class="home-content">
-          <header class="home-heading"><p class="small-label">SECURITY STUDENT / QwQ</p><h1 id="home-title">QwQ<span class="accent">.</span></h1><p>정보보안을 공부하는 학생</p></header>
-          <section class="home-description" aria-label="자기소개"><span class="small-label">ABOUT ME</span><div id="description" class="description"></div></section>
-          <section class="home-history" aria-labelledby="timeline-title">
-            <div class="home-history-heading"><div><span class="small-label">HISTORY</span><h2 id="timeline-title">이력<span class="accent">.</span></h2></div><div id="timeline-pager" class="timeline-pager" aria-label="이력 페이지"></div></div>
-            <div id="timeline" class="timeline"></div>
-          </section>
         </div>
       </section>`;
 
@@ -150,9 +146,8 @@
           timeline.append(el("p", "home-empty", "등록된 이력이 없습니다."));
           return;
         }
-        items.slice(currentPage * pageSize, (currentPage + 1) * pageSize).forEach((item, offset) => {
+        items.slice(currentPage * pageSize, (currentPage + 1) * pageSize).forEach((item) => {
           const row = el("article", "timeline-row");
-          row.append(el("span", "timeline-index", String(currentPage * pageSize + offset + 1).padStart(2, "0")));
           row.append(el("time", "timeline-date", dateRange(item.start, item.end)));
           const desc = el("p", "timeline-desc");
           appendLinkedText(desc, item.desc);
