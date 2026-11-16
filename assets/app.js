@@ -11,7 +11,7 @@
   };
   const pageUrl = (path) => {
     const target = new URL(path, base);
-    target.searchParams.set("v", "20261116-dotname1");
+    target.searchParams.set("v", "20261116-dots1");
     return target.href;
   };
 
@@ -384,7 +384,7 @@
     entries.forEach(([key, value]) => {
       const item = value || {};
       const href = safeHref(item.link);
-      const card = el(href ? "a" : "div", href ? "contact-card" : "contact-card disabled");
+      const card = el(href ? "a" : "div", "contact-card");
       if (href) {
         card.href = href;
         if (!href.startsWith("mailto:")) { card.target = "_blank"; card.rel = "noopener noreferrer"; }
@@ -403,8 +403,8 @@
       } else iconWrap.append(el("span", "contact-initial", key.slice(0, 2).toUpperCase()));
       const text = el("span", "contact-text");
       text.append(el("span", "contact-hint", item.category || hints[key.toLowerCase()] || "LINK"), el("strong", "", item.label || labels[key.toLowerCase()] || key));
-      card.append(iconWrap, text, el("span", "contact-action", href ? "↗" : "—"));
-      if (!href) card.title = "contact.json에 링크를 입력하면 활성화됩니다.";
+      card.append(iconWrap, text);
+      if (href) card.append(el("span", "contact-action", "↗"));
       list.append(card);
     });
   }

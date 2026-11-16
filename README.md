@@ -11,7 +11,7 @@ GitHub Pages용 정적 사이트입니다. 빌드 과정이나 외부 서비스 
 | `summary.json` | `[ {"start":"2024.03","end":"2024.12","desc":"내용"} ]` 형식의 이력 배열입니다. `end`를 생략하면 `시작일 ~`로 표시됩니다. |
 | `projects.json` | 프로젝트명을 키로 하는 객체입니다. 각 프로젝트에는 `desc`, `start`, 선택 사항인 `end`, `tags` 배열을 넣습니다. |
 | `achievements.json` | 성과명을 키로 하는 객체입니다. 각 성과에는 `desc`, `tags`, `achv` 배열을 넣습니다. 현재는 빈 객체 `{}`입니다. |
-| `contact.json` | 서비스별 `icon` 이미지 URL 또는 로컬 경로, `link`, 작은 상단 문구인 `category`를 적습니다. 링크가 빈 문자열이면 카드가 비활성화됩니다. |
+| `contact.json` | 서비스별 `icon` 이미지 URL 또는 로컬 경로, 선택 사항인 `link`, 작은 상단 문구인 `category`를 적습니다. 링크가 없어도 카드는 동일하게 표시되며, 링크가 있을 때만 화살표와 이동 기능이 생깁니다. |
 
 `[Google](https://google.com)`처럼 자기소개, 이력, 프로젝트·성과 설명에 Markdown 링크를 넣을 수 있습니다. 이메일은 `[메일 보내기](name@example.com)`처럼 적습니다. 다른 HTML은 텍스트로 처리됩니다.
 
