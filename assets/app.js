@@ -11,7 +11,7 @@
   };
   const pageUrl = (path) => {
     const target = new URL(path, base);
-    target.searchParams.set("v", "20261116-samples1");
+    target.searchParams.set("v", "20261116-layout1");
     return target.href;
   };
 
@@ -288,7 +288,7 @@
     main.innerHTML = `
       <section class="content-intro" aria-labelledby="listing-title"><h1 id="listing-title">${config.title}<span class="accent">.</span></h1><p>${config.intro}</p></section>
       <section class="content-section projects-section" aria-label="${config.label} 목록">
-        <div class="project-toolbar"><p class="toolbar-title"><strong id="project-count">0</strong>개의 ${config.label}</p><div class="filter-wrap"><button id="filter-button" class="filter-button" type="button" aria-expanded="false" aria-controls="filter-panel">태그 필터 <span id="filter-count"></span><span aria-hidden="true" class="filter-chevron">⌄</span></button><div id="filter-panel" class="filter-panel" hidden><label class="filter-search-label" for="tag-search">태그 검색</label><input id="tag-search" type="search" placeholder="태그 찾기" autocomplete="off"><div id="tag-options" class="tag-options"></div><p class="filter-help">여러 태그를 선택하면 하나라도 포함된 ${config.label}가 표시됩니다.</p></div></div></div>
+        <div class="project-toolbar"><p class="toolbar-title"><strong id="project-count">0</strong>개의 ${config.label}</p><div class="filter-wrap"><button id="filter-button" class="filter-button" type="button" aria-expanded="false" aria-controls="filter-panel">필터 <span id="filter-count"></span><span aria-hidden="true" class="filter-chevron">⌄</span></button><div id="filter-panel" class="filter-panel" hidden><label class="filter-search-label" for="tag-search">태그 검색</label><input id="tag-search" type="search" placeholder="태그 찾기" autocomplete="off"><div id="tag-options" class="tag-options"></div><p class="filter-help">여러 태그를 선택하면 하나라도 포함된 ${config.label}가 표시됩니다.</p></div></div></div>
         <div id="active-filters" class="active-filters" aria-live="polite"></div><div id="project-list" class="project-list"></div><p id="no-results" class="empty-note" hidden>선택한 태그에 해당하는 ${config.label}가 없습니다.</p>
       </section>`;
     let data;
