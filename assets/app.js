@@ -11,7 +11,7 @@
   };
   const pageUrl = (path) => {
     const target = new URL(path, base);
-    target.searchParams.set("v", "20261116-index5");
+    target.searchParams.set("v", "20261116-index6");
     return target.href;
   };
 

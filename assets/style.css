@@ -148,8 +148,8 @@ html[data-page=home] #app{height:100dvh;min-height:0;overflow:clip}
 html[data-page=home] .site-shell{height:100%;max-width:1600px;padding:0 clamp(18px,2.5vw,42px);display:flex;flex-direction:column}
 html[data-page=home] .site-footer{display:none}
 .home-main{flex:1;min-height:0;display:flex;align-items:center;overflow:clip}
-.home-panel{width:100%;max-height:100%;display:grid;grid-template-columns:minmax(0,580px) minmax(260px,390px);justify-content:space-between;gap:clamp(42px,6vw,110px);align-items:stretch;padding:clamp(18px,3vh,36px) clamp(8px,2vw,28px);background:radial-gradient(circle at 76% 50%,rgba(27,114,119,.13),transparent 38%),linear-gradient(115deg,rgba(6,19,27,.15),rgba(33,17,39,.08));border-bottom:1px solid var(--line)}
-.home-portrait.profile-frame{width:100%;height:100%;min-height:0;aspect-ratio:auto;justify-self:end}
+.home-panel{width:100%;max-height:100%;display:grid;grid-template-columns:minmax(0,640px) minmax(260px,470px);justify-content:center;gap:clamp(30px,4vw,70px);align-items:center;padding:clamp(18px,3vh,36px) clamp(8px,2vw,28px);background:radial-gradient(circle at 76% 50%,rgba(27,114,119,.13),transparent 38%),linear-gradient(115deg,rgba(6,19,27,.15),rgba(33,17,39,.08));border-bottom:1px solid var(--line)}
+.home-portrait.profile-frame{width:100%;height:auto;aspect-ratio:1;justify-self:end}
 .home-content{min-width:0;display:flex;flex-direction:column;gap:clamp(32px,6vh,54px)}
 .home-heading h1{font-size:clamp(70px,7vw,106px);line-height:1;letter-spacing:-.085em;margin:0 0 16px;font-weight:800}
 .home-heading .description{min-height:64px;padding-top:5px;font-size:clamp(16px,1.8vw,22px);line-height:1.55;color:#bbd3d2}
