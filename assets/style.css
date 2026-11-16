@@ -178,9 +178,30 @@ html[data-page=home] .site-shell{height:100%;display:flex;flex-direction:column}
 .content-main .project-list{gap:0;border-bottom:1px solid var(--line)}
 .content-main .project-card{border:0;border-top:1px solid var(--line);background:transparent}
 .content-main .project-card:hover,.content-main .project-card:has(.project-trigger[aria-expanded=true]){background:rgba(112,242,227,.045)}
-.content-main .project-trigger{height:165px;padding:19px 8px}
+.content-main .project-trigger{height:122px;padding:13px 8px}
+.content-main .project-heading-row{display:flex;align-items:center;gap:12px;min-width:0;margin-top:5px}
+.content-main .project-heading-row .project-title{display:block;flex:0 1 auto;min-width:0;max-width:70%;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:19px}
+.content-main .project-heading-row .project-tags{display:flex;flex:1;min-width:0;gap:5px;margin:0;padding:0;overflow-x:auto;scrollbar-width:none}
+.content-main .project-heading-row .project-tags:empty{display:none}
+.content-main .tag{padding:4px 7px}
+.content-main .project-preview{margin-top:6px}
 .content-main .project-detail{padding:0 8px 25px}
+.content-main .achievement-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(116px,38%);align-items:center;gap:14px;padding:10px 8px}
+.content-main .achievement-row:has(.achievement-tiles:empty){grid-template-columns:1fr}
+.content-main .achievement-info{min-width:0;min-height:116px;display:flex;flex-direction:column;justify-content:center;cursor:pointer}
+.content-main .achievement-info .project-heading-row{margin-top:0}
+.content-main .achievement-info .project-tags{flex:0 1 auto;max-width:45%}
+.content-main .achievement-info .project-arrow{flex:none;margin-left:3px;font-size:16px}
+.content-main .achievement-info[aria-expanded=true] .project-arrow{transform:rotate(135deg)}
+.content-main .achievement-tiles{display:flex;gap:8px;min-width:0;width:100%;max-width:390px;justify-self:end;overflow-x:auto;scrollbar-width:thin;scrollbar-color:var(--cyan) transparent;padding-bottom:2px}
+.content-main .achievement-tile{flex:0 0 116px;width:116px;height:116px;display:flex;flex-direction:column;justify-content:space-between;min-width:0;padding:10px;border:1px solid var(--line-bright);background:linear-gradient(145deg,rgba(16,46,52,.72),rgba(21,24,39,.72))}
+.content-main .achievement-tile:first-child{margin-left:auto}
+.content-main .achievement-tile-desc{color:#a9c8c6;font-size:11px;line-height:1.3;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.content-main .achievement-tile-value{color:var(--cyan);font-size:36px;line-height:1.1;font-weight:800;letter-spacing:-.06em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center}
+.content-main .achievement-tile-value.medium{font-size:27px}
+.content-main .achievement-tile-value.long{font-size:20px}
+.content-main .achievement-tile-date{color:#99b4b8;font:10px var(--mono);white-space:nowrap}
 .content-main .contact-list{gap:14px}
 .content-main .contact-card{min-height:124px;background:rgba(13,30,38,.7)}
-@media(max-width:650px){.content-main{padding:56px 1% 80px}.content-intro{padding-bottom:30px;margin-bottom:26px}.content-intro h1{font-size:clamp(55px,14vw,70px)}.content-intro p{font-size:14px;margin-top:13px}.content-main .project-toolbar{align-items:center}.content-main .toolbar-title{font-size:12px}.content-main .toolbar-title strong{font-size:23px}.content-main .project-trigger{height:185px;padding:18px 4px}.content-main .project-detail{padding:0 4px 20px}.content-main .contact-card{min-height:98px}}
+@media(max-width:650px){.content-main{padding:56px 1% 80px}.content-intro{padding-bottom:30px;margin-bottom:26px}.content-intro h1{font-size:clamp(55px,14vw,70px)}.content-intro p{font-size:14px;margin-top:13px}.content-main .project-toolbar{align-items:center}.content-main .toolbar-title{font-size:12px}.content-main .toolbar-title strong{font-size:23px}.content-main .project-trigger{height:132px;padding:13px 4px}.content-main .project-heading-row{gap:6px}.content-main .project-heading-row .project-title{font-size:16px;max-width:65%}.content-main .tag{font-size:9px;padding:4px 5px}.content-main .project-detail{padding:0 4px 20px}.content-main .achievement-row{grid-template-columns:minmax(0,1fr) 106px;gap:8px;padding:8px 4px}.content-main .achievement-info{min-height:104px}.content-main .achievement-info .project-arrow{font-size:16px}.content-main .achievement-tiles{max-width:106px}.content-main .achievement-tile{flex-basis:104px;width:104px;height:104px;padding:8px}.content-main .achievement-tile-value{font-size:30px}.content-main .achievement-tile-date{font-size:9px}.content-main .contact-card{min-height:98px}}
 @media(max-width:650px){html[data-page=achievements] .content-intro h1{font-size:clamp(40px,11vw,70px)}}

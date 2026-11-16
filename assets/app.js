@@ -11,7 +11,7 @@
   };
   const pageUrl = (path) => {
     const target = new URL(path, base);
-    target.searchParams.set("v", "20261116-achievements1");
+    target.searchParams.set("v", "20261116-achievements2");
     return target.href;
   };
 
@@ -36,11 +36,11 @@
 
   function appendLinkedText(target, value) {
     const text = String(value || "");
-    const pattern = /!\[([^\]\r\n]+)\]/g;
+    const pattern = /\[([^\]\r\n]+)\]\(([^)\r\n]+)\)/g;
     let last = 0;
     for (const match of text.matchAll(pattern)) {
       target.append(document.createTextNode(text.slice(last, match.index)));
-      const href = safeHref(match[1]);
+      const href = safeHref(match[2]);
       if (href) {
         const link = el("a", "inline-link", match[1]);
         link.href = href;
@@ -99,8 +99,8 @@
     return box;
   }
 
-  function dateRange(start, end) {
-    return end ? `${start || ""} ~ ${end}` : String(start || "날짜 미입력");
+  function dateRange(start, end, openEnded = false) {
+    return end ? `${start || ""} ~ ${end}` : `${start || "날짜 미입력"}${openEnded ? " ~" : ""}`;
   }
 
   function dateKey(value) {
@@ -153,6 +153,19 @@
     } else timeline.append(errorNotice("이력을 불러오지 못했습니다. summary.json을 확인해 주세요."));
   }
 
+  function entryTags(entry) {
+    return Array.isArray(entry.tags) ? [...new Set(entry.tags.filter((tag) => typeof tag === "string" && tag.trim()).map((tag) => tag.trim()))] : [];
+  }
+
+  function headingWithTags(name, tags) {
+    const heading = el("div", "project-heading-row");
+    heading.append(el("h2", "project-title", name));
+    const tagList = el("div", "project-tags");
+    tags.forEach((tag) => tagList.append(el("span", "tag", `#${tag}`)));
+    heading.append(tagList);
+    return heading;
+  }
+
   function projectCard(name, project, detailLabel) {
     const card = el("article", "project-card");
     const trigger = el("div", "project-trigger");
@@ -162,17 +175,15 @@
     const detailId = `project-detail-${Math.random().toString(36).slice(2)}`;
     trigger.setAttribute("aria-controls", detailId);
     const top = el("div", "project-top");
-    top.append(el("time", "project-date", dateRange(project.start, project.end)));
+    top.append(el("time", "project-date", dateRange(project.start, project.end, true)));
     top.append(el("span", "project-arrow", "↗"));
-    const title = el("h2", "project-title", name);
+    const cleanTags = entryTags(project);
+    const heading = headingWithTags(name, cleanTags);
     const text = String(project.desc || "");
     const [firstLine, ...rest] = text.split(/\r?\n/);
     const preview = el("p", "project-preview");
     appendLinkedText(preview, firstLine);
-    const tags = el("div", "project-tags");
-    const cleanTags = Array.isArray(project.tags) ? [...new Set(project.tags.filter((tag) => typeof tag === "string" && tag.trim()).map((tag) => tag.trim()))] : [];
-    cleanTags.forEach((tag) => tags.append(el("span", "tag", `#${tag}`)));
-    trigger.append(top, title, preview, tags);
+    trigger.append(top, heading, preview);
     const detail = el("div", "project-detail");
     detail.id = detailId;
     detail.hidden = true;
@@ -200,6 +211,69 @@
     return { card, tags: cleanTags };
   }
 
+  function achievementCard(name, achievement) {
+    const card = el("article", "project-card achievement-card");
+    const row = el("div", "achievement-row");
+    const trigger = el("div", "achievement-info");
+    trigger.setAttribute("role", "button");
+    trigger.tabIndex = 0;
+    trigger.setAttribute("aria-expanded", "false");
+    const detail = el("div", "project-detail achievement-detail");
+    detail.id = `achievement-detail-${Math.random().toString(36).slice(2)}`;
+    detail.hidden = true;
+    trigger.setAttribute("aria-controls", detail.id);
+
+    const tags = entryTags(achievement);
+    const text = String(achievement.desc || "");
+    const [firstLine, ...rest] = text.split(/\r?\n/);
+    const preview = el("p", "project-preview");
+    appendLinkedText(preview, firstLine);
+    const heading = headingWithTags(name, tags);
+    heading.append(el("span", "project-arrow achievement-arrow", "↗"));
+    trigger.append(heading, preview);
+    if (rest.length) {
+      detail.append(el("span", "small-label", "MORE ABOUT THIS ACHIEVEMENT"));
+      const body = el("p", "project-detail-text");
+      appendLinkedText(body, rest.join("\n"));
+      detail.append(body);
+    } else detail.append(el("p", "project-detail-text", "추가 설명이 없습니다."));
+    const toggle = () => {
+      const open = trigger.getAttribute("aria-expanded") === "true";
+      trigger.setAttribute("aria-expanded", String(!open));
+      detail.hidden = open;
+    };
+    trigger.addEventListener("click", (event) => { if (!event.target.closest("a")) toggle(); });
+    trigger.addEventListener("keydown", (event) => {
+      if ((event.key === "Enter" || event.key === " ") && !event.target.closest("a")) {
+        event.preventDefault();
+        toggle();
+      }
+    });
+
+    const tiles = el("div", "achievement-tiles");
+    const records = Array.isArray(achievement.achv) ? achievement.achv : [];
+    records.forEach((record) => {
+      if (!record || typeof record !== "object" || Array.isArray(record)) return;
+      const [metricName, rawValue] = Object.entries(record).find(([key]) => key !== "desc" && key !== "date") || ["value", "—"];
+      const metricValue = rawValue == null ? "—" : String(rawValue);
+      const description = String(record.desc || metricName);
+      const dateText = String(record.date || "");
+      const tile = el("div", "achievement-tile");
+      tile.setAttribute("aria-label", `${description}: ${metricValue}${dateText ? `, ${dateText}` : ""}`);
+      tile.title = `${metricName}: ${metricValue}`;
+      const date = el("time", "achievement-tile-date", dateText);
+      if (/^\d{4}\.\d{2}\.\d{2}$/.test(dateText)) date.dateTime = dateText.replace(/\./g, "-");
+      const value = el("strong", "achievement-tile-value", metricValue);
+      if (metricValue.length > 6) value.classList.add("long");
+      else if (metricValue.length >= 4) value.classList.add("medium");
+      tile.append(el("span", "achievement-tile-desc", description), value, date);
+      tiles.append(tile);
+    });
+    row.append(trigger, tiles);
+    card.append(row, detail);
+    return { card, tags };
+  }
+
   async function projectListing(main, kind) {
     const config = kind === "achievements" ? {
       title: "Achievements", intro: "기록할 만한 성과를 모아 둡니다.", label: "성과",
@@ -224,7 +298,9 @@
     }
     const entries = Object.entries(data);
     const list = main.querySelector("#project-list");
-    const cards = entries.map(([name, project]) => projectCard(name, project || {}, config.detailLabel));
+    const cards = entries.map(([name, entry]) => kind === "achievements"
+      ? achievementCard(name, entry || {})
+      : projectCard(name, entry || {}, config.detailLabel));
     cards.forEach(({ card }) => list.append(card));
     if (!cards.length) list.append(el("p", "empty-note", `등록된 ${config.label}가 없습니다.`));
 
