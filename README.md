@@ -1,1 +1,29 @@
-# QwQP0.github.io
+# QwQP0 블로그
+
+GitHub Pages용 정적 사이트입니다. 빌드 과정이나 외부 서비스 없이 `main` 브랜치의 루트에서 배포할 수 있습니다.
+
+## 내용 바꾸기
+
+| 파일 | 내용 |
+| --- | --- |
+| `profile.png` | 메인 페이지 프로필 사진. 같은 이름의 PNG로 덮어쓰세요. 현재는 GitHub 계정 이미지입니다. |
+| `desc.json` | 자기소개를 JSON 문자열 하나로 작성합니다. 개행은 `\n`을 사용합니다. |
+| `summary.json` | `[ {"start":"2024.03","end":"2024.12","desc":"내용"} ]` 형식의 이력 배열입니다. `end`는 생략할 수 있습니다. |
+| `projects.json` | 프로젝트명을 키로 하는 객체입니다. 각 프로젝트에는 `desc`, `start`, 선택 사항인 `end`, `tags` 배열을 넣습니다. |
+| `contact.json` | 서비스별 `icon` 이미지 URL 또는 로컬 경로와 `link`를 적습니다. 링크가 빈 문자열이면 카드가 비활성화됩니다. |
+
+`![google.com]` 또는 `![https://example.com]`을 자기소개, 이력, 프로젝트 설명에 넣으면 해당 주소로 이동하는 링크가 됩니다. 이메일은 `![name@example.com]`처럼 적을 수 있습니다. 다른 HTML은 텍스트로 처리됩니다.
+
+프로젝트 설명의 **첫 줄**은 접힌 카드에 표시되고, 두 번째 줄부터는 카드를 열어 볼 수 있습니다. 태그 필터에서 여러 항목을 체크하면 **OR** 조건으로 검색합니다.
+
+현재 이력과 프로젝트 데이터는 구조를 보여 주는 예시입니다. 실제 내용을 입력한 뒤 공개하세요. GitHub 링크 외의 연락처는 아직 비어 있습니다.
+
+## GitHub Pages
+
+저장소가 `QwQP0.github.io`이면 GitHub Pages의 **Deploy from a branch → main → /(root)**로 설정하세요. 배포 주소는 [https://qwqp0.github.io/](https://qwqp0.github.io/)입니다. `/index/`는 메인 페이지로 이동하며 `/projects/`, `/contact/`도 사용할 수 있습니다.
+
+로컬에서는 파일을 직접 열면 JSON 로딩이 제한될 수 있습니다. 정적 HTTP 서버로 미리보기 하세요. 예: `npx serve .`
+
+## 테마
+
+이미지 배경은 사용하지 않습니다. 색과 그라데이션은 `assets/style.css` 상단의 CSS 변수 및 `body`, `.hero`, `.page-intro`에서 바꿀 수 있습니다. 폰트는 Google Fonts를 사용하며, 연결되지 않아도 시스템 폰트로 표시됩니다.

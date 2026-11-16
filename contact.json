@@ -1,0 +1,7 @@
+{
+  "instagram": { "icon": "assets/icons/instagram.svg", "link": "" },
+  "github": { "icon": "assets/icons/github.svg", "link": "https://github.com/QwQP0" },
+  "gmail": { "icon": "assets/icons/gmail.svg", "link": "" },
+  "boj": { "icon": "assets/icons/boj.svg", "link": "" },
+  "ctftime": { "icon": "assets/icons/ctftime.svg", "link": "" }
+}
