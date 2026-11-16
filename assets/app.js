@@ -11,7 +11,7 @@
   };
   const pageUrl = (path) => {
     const target = new URL(path, base);
-    target.searchParams.set("v", "20261116-index6");
+    target.searchParams.set("v", "20261116-pages7");
     return target.href;
   };
 
@@ -200,10 +200,11 @@
   }
 
   async function projects(main) {
+    main.classList.add("content-main");
     main.innerHTML = `
-      <section class="page-intro"><div class="page-intro-glow" aria-hidden="true"></div><p class="eyebrow"><span class="eyebrow-line"></span> THE WORK <span class="eyebrow-index">002 / 003</span></p><h1>Projects<span class="accent">.</span></h1><p>공부하며 진행한 프로젝트를 정리합니다.</p><span class="page-intro-mark" aria-hidden="true">P/</span></section>
-      <section class="section projects-section" aria-label="프로젝트 목록">
-        <div class="project-toolbar"><div><span class="small-label">ARCHIVE / SELECTED WORK</span><p class="toolbar-title"><strong id="project-count">0</strong>개의 프로젝트</p></div><div class="filter-wrap"><button id="filter-button" class="filter-button" type="button" aria-expanded="false" aria-controls="filter-panel">태그 필터 <span id="filter-count"></span><span aria-hidden="true" class="filter-chevron">⌄</span></button><div id="filter-panel" class="filter-panel" hidden><label class="filter-search-label" for="tag-search">태그 검색</label><input id="tag-search" type="search" placeholder="태그 찾기" autocomplete="off"><div id="tag-options" class="tag-options"></div><p class="filter-help">여러 태그를 선택하면 하나라도 포함된 프로젝트가 표시됩니다.</p></div></div></div>
+      <section class="content-intro" aria-labelledby="projects-title"><h1 id="projects-title">Projects<span class="accent">.</span></h1><p>공부하며 진행한 프로젝트를 정리합니다.</p></section>
+      <section class="content-section projects-section" aria-label="프로젝트 목록">
+        <div class="project-toolbar"><p class="toolbar-title"><strong id="project-count">0</strong>개의 프로젝트</p><div class="filter-wrap"><button id="filter-button" class="filter-button" type="button" aria-expanded="false" aria-controls="filter-panel">태그 필터 <span id="filter-count"></span><span aria-hidden="true" class="filter-chevron">⌄</span></button><div id="filter-panel" class="filter-panel" hidden><label class="filter-search-label" for="tag-search">태그 검색</label><input id="tag-search" type="search" placeholder="태그 찾기" autocomplete="off"><div id="tag-options" class="tag-options"></div><p class="filter-help">여러 태그를 선택하면 하나라도 포함된 프로젝트가 표시됩니다.</p></div></div></div>
         <div id="active-filters" class="active-filters" aria-live="polite"></div><div id="project-list" class="project-list"></div><p id="no-results" class="empty-note" hidden>선택한 태그에 해당하는 프로젝트가 없습니다.</p>
       </section>`;
     let data;
@@ -281,9 +282,10 @@
   }
 
   async function contact(main) {
+    main.classList.add("content-main");
     main.innerHTML = `
-      <section class="page-intro"><div class="page-intro-glow" aria-hidden="true"></div><p class="eyebrow"><span class="eyebrow-line"></span> SAY HELLO <span class="eyebrow-index">003 / 003</span></p><h1>Contact<span class="accent">.</span></h1><p>질문이나 피드백이 있다면 편하게 연락해 주세요.</p><span class="page-intro-mark" aria-hidden="true">C/</span></section>
-      <section class="section contact-section"><div class="section-heading"><span class="section-number">CONNECT / ONLINE</span><h2>연락처<span class="accent">.</span></h2><p>FIND ME ON THE WEB</p></div><div id="contact-list" class="contact-list"></div></section>`;
+      <section class="content-intro" aria-labelledby="contact-title"><h1 id="contact-title">Contact<span class="accent">.</span></h1><p>질문이나 피드백이 있다면 편하게 연락해 주세요.</p></section>
+      <section class="content-section contact-section" aria-label="연락처"><div id="contact-list" class="contact-list"></div></section>`;
     let data;
     try { data = await loadJson("contact.json"); }
     catch { main.querySelector("#contact-list").append(errorNotice("연락처를 불러오지 못했습니다. contact.json을 확인해 주세요.")); return; }

@@ -164,3 +164,21 @@ html[data-page=home] .site-footer{display:none}
 @media(max-width:900px){.home-panel{grid-template-columns:minmax(0,1fr) minmax(210px,34%);gap:35px}.home-content{gap:36px}.home-history .timeline-row{grid-template-columns:135px minmax(0,1fr);gap:14px}}
 @media(max-width:650px){html[data-page=home] .site-shell{padding:0 18px}.home-panel{grid-template-columns:minmax(0,1fr) minmax(96px,38%);grid-template-areas:'heading portrait' 'history history';gap:20px;align-content:center;align-items:center;padding:12px 1%}.home-content{display:contents}.home-heading{grid-area:heading}.home-heading h1{font-size:clamp(42px,11vw,65px);margin-bottom:8px}.home-heading .description{min-height:46px;padding-top:3px;font-size:13px;line-height:1.5}.home-portrait.profile-frame{grid-area:portrait;width:100%;height:auto;aspect-ratio:1;padding:6px}.home-portrait.profile-frame::after{inset:6px}.home-portrait .profile-fallback{inset:6px;font-size:55px}.home-history{grid-area:history}.home-history .timeline{max-height:249px}.home-history .timeline-row{height:62px;grid-template-columns:1fr;grid-template-rows:18px 1fr;align-items:start;gap:1px;padding:7px 0}.home-history .timeline-date{grid-column:1;grid-row:1;font-size:10px}.home-history .timeline-desc{grid-column:1;grid-row:2;font-size:11px;line-height:1.4;-webkit-line-clamp:2}}
 @media(max-width:650px) and (max-height:600px){.home-panel{gap:12px;padding:7px 1%}.home-heading h1{font-size:39px}.home-heading .description{min-height:38px;font-size:11px;line-height:1.4}.home-portrait.profile-frame{max-width:115px}.home-history .timeline{max-height:213px}.home-history .timeline-row{height:53px}}
+
+/* Projects and Contact use the same typography and horizontal rhythm as Home. */
+.content-main{max-width:1220px;margin:0 auto;padding:clamp(56px,7vh,90px) clamp(8px,2vw,28px) 110px}
+.content-intro{padding-bottom:42px;margin-bottom:34px;border-bottom:1px solid var(--line)}
+.content-intro h1{font-size:clamp(70px,7vw,106px);line-height:1;font-weight:800;letter-spacing:-.085em;margin:0}
+.content-intro p{margin:20px 0 0;color:#bbd3d2;font-size:clamp(16px,1.8vw,22px);line-height:1.55;letter-spacing:-.03em}
+.content-section{min-height:0}
+.content-main .project-toolbar{align-items:center;margin-bottom:22px}
+.content-main .toolbar-title{margin:0;color:#a6bec0;font-size:13px}
+.content-main .toolbar-title strong{margin-right:7px;color:var(--cyan);font-size:27px;vertical-align:-2px}
+.content-main .project-list{gap:0;border-bottom:1px solid var(--line)}
+.content-main .project-card{border:0;border-top:1px solid var(--line);background:transparent}
+.content-main .project-card:hover,.content-main .project-card:has(.project-trigger[aria-expanded=true]){background:rgba(112,242,227,.045)}
+.content-main .project-trigger{height:165px;padding:19px 8px}
+.content-main .project-detail{padding:0 8px 25px}
+.content-main .contact-list{gap:14px}
+.content-main .contact-card{min-height:124px;background:rgba(13,30,38,.7)}
+@media(max-width:650px){.content-main{padding:56px 1% 80px}.content-intro{padding-bottom:30px;margin-bottom:26px}.content-intro h1{font-size:clamp(55px,14vw,70px)}.content-intro p{font-size:14px;margin-top:13px}.content-main .project-toolbar{align-items:center}.content-main .toolbar-title{font-size:12px}.content-main .toolbar-title strong{font-size:23px}.content-main .project-trigger{height:185px;padding:18px 4px}.content-main .project-detail{padding:0 4px 20px}.content-main .contact-card{min-height:98px}}
