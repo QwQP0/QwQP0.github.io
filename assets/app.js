@@ -11,7 +11,7 @@
   };
   const pageUrl = (path) => {
     const target = new URL(path, base);
-    target.searchParams.set("v", "20261116-index4");
+    target.searchParams.set("v", "20261116-index5");
     return target.href;
   };
 
@@ -102,13 +102,19 @@
     return end ? `${start || ""} ~ ${end}` : String(start || "날짜 미입력");
   }
 
+  function dateKey(value) {
+    const parts = String(value || "").match(/^(\d{4})(?:\.(\d{1,2}))?(?:\.(\d{1,2}))?$/);
+    if (!parts) return -1;
+    return Number(parts[1]) * 10000 + Number(parts[2] || 0) * 100 + Number(parts[3] || 0);
+  }
+
   async function home(main) {
     main.classList.add("home-main");
     main.innerHTML = `
       <section class="home-panel" aria-labelledby="home-title">
         <div class="home-content">
           <header class="home-heading"><h1 id="home-title">QwQ<span class="accent">.</span></h1><div id="description" class="description"></div></header>
-          <section class="home-history" aria-label="이력"><div id="timeline" class="timeline"></div><div id="timeline-pager" class="timeline-pager" aria-label="이력 페이지"></div></section>
+          <section class="home-history" aria-label="이력"><div id="timeline" class="timeline" tabindex="0" aria-label="이력 목록"></div></section>
         </div>
         <div class="home-portrait profile-frame">
           <div class="profile-corner top-left" aria-hidden="true"></div><div class="profile-corner bottom-right" aria-hidden="true"></div>
@@ -133,49 +139,16 @@
 
     const timeline = main.querySelector("#timeline");
     if (summaryResult.status === "fulfilled" && Array.isArray(summaryResult.value)) {
-      const items = summaryResult.value;
-      const pager = main.querySelector("#timeline-pager");
-      let currentPage = 0;
-      let previousPageSize = null;
-      function renderTimeline() {
-        const pageSize = window.innerWidth <= 650 ? 2 : window.innerHeight < 700 ? 3 : 4;
-        if (previousPageSize !== null && previousPageSize !== pageSize) {
-          currentPage = Math.floor(currentPage * previousPageSize / pageSize);
-        }
-        previousPageSize = pageSize;
-        const totalPages = Math.max(1, Math.ceil(items.length / pageSize));
-        currentPage = Math.min(currentPage, totalPages - 1);
-        timeline.replaceChildren();
-        pager.replaceChildren();
-        if (!items.length) {
-          timeline.append(el("p", "home-empty", "등록된 이력이 없습니다."));
-          return;
-        }
-        items.slice(currentPage * pageSize, (currentPage + 1) * pageSize).forEach((item) => {
-          const row = el("article", "timeline-row");
-          row.append(el("time", "timeline-date", dateRange(item.start, item.end)));
-          const desc = el("p", "timeline-desc");
-          appendLinkedText(desc, item.desc);
-          row.append(desc);
-          timeline.append(row);
-        });
-        if (totalPages > 1) {
-          const previous = el("button", "pager-button", "←");
-          previous.type = "button";
-          previous.setAttribute("aria-label", "이전 이력 페이지");
-          previous.disabled = currentPage === 0;
-          previous.addEventListener("click", () => { currentPage--; renderTimeline(); });
-          const indicator = el("span", "pager-indicator", `${String(currentPage + 1).padStart(2, "0")} / ${String(totalPages).padStart(2, "0")}`);
-          const next = el("button", "pager-button", "→");
-          next.type = "button";
-          next.setAttribute("aria-label", "다음 이력 페이지");
-          next.disabled = currentPage === totalPages - 1;
-          next.addEventListener("click", () => { currentPage++; renderTimeline(); });
-          pager.append(previous, indicator, next);
-        }
-      }
-      renderTimeline();
-      window.addEventListener("resize", renderTimeline);
+      const items = [...summaryResult.value].sort((a, b) => dateKey(b.start) - dateKey(a.start));
+      if (!items.length) timeline.append(el("p", "home-empty", "등록된 이력이 없습니다."));
+      items.forEach((item) => {
+        const row = el("article", "timeline-row");
+        row.append(el("time", "timeline-date", dateRange(item.start, item.end)));
+        const desc = el("p", "timeline-desc");
+        appendLinkedText(desc, item.desc);
+        row.append(desc);
+        timeline.append(row);
+      });
     } else timeline.append(errorNotice("이력을 불러오지 못했습니다. summary.json을 확인해 주세요."));
   }
 
