@@ -11,7 +11,7 @@
   };
   const pageUrl = (path) => {
     const target = new URL(path, base);
-    target.searchParams.set("v", "20261116-corner1");
+    target.searchParams.set("v", "20261116-history1");
     return target.href;
   };
 
@@ -99,8 +99,8 @@
     return box;
   }
 
-  function dateRange(start, end, openEnded = false) {
-    return end ? `${start || ""} ~ ${end}` : `${start || "날짜 미입력"}${openEnded ? " ~" : ""}`;
+  function dateRange(start, end) {
+    return end ? `${start || ""} ~ ${end}` : `${start || "날짜 미입력"} ~`;
   }
 
   function dateKey(value) {
@@ -176,7 +176,7 @@
     const detailId = `project-detail-${Math.random().toString(36).slice(2)}`;
     trigger.setAttribute("aria-controls", detailId);
     const top = el("div", "project-top");
-    top.append(el("time", "project-date", dateRange(project.start, project.end, true)));
+    top.append(el("time", "project-date", dateRange(project.start, project.end)));
     top.append(el("span", "project-arrow", "↗"));
     const cleanTags = entryTags(project);
     const heading = headingWithTags(name, cleanTags);
