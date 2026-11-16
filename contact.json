@@ -1,7 +1,7 @@
 {
-  "instagram": { "icon": "https://cdn.simpleicons.org/instagram", "link": "" },
-  "github": { "icon": "https://cdn.simpleicons.org/github", "link": "https://github.com/QwQP0" },
-  "gmail": { "icon": "https://cdn.simpleicons.org/gmail", "link": "" },
-  "boj": { "icon": "https://cdn.jsdelivr.net/npm/lucide-static@1.73.0/icons/code-xml.svg", "link": "" },
-  "ctftime": { "icon": "https://cdn.jsdelivr.net/npm/lucide-static@1.73.0/icons/flag-triangle-right.svg", "link": "" }
+  "instagram": { "icon": "https://cdn.simpleicons.org/instagram/70f2e3", "link": "", "category": "SOCIAL", "tint": false },
+  "github": { "icon": "https://cdn.simpleicons.org/github/70f2e3", "link": "https://github.com/QwQP0", "category": "CODE", "tint": false },
+  "gmail": { "icon": "https://cdn.simpleicons.org/gmail/70f2e3", "link": "", "category": "EMAIL", "tint": false },
+  "boj": { "icon": "https://api.iconify.design/lucide/code-xml.svg?color=%2370f2e3", "link": "", "category": "ALGORITHM", "tint": false },
+  "ctftime": { "icon": "https://api.iconify.design/lucide/flag-triangle-right.svg?color=%2370f2e3", "link": "", "category": "SECURITY", "tint": false }
 }

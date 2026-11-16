@@ -11,7 +11,7 @@
   };
   const pageUrl = (path) => {
     const target = new URL(path, base);
-    target.searchParams.set("v", "20261116-icons1");
+    target.searchParams.set("v", "20261116-polish1");
     return target.href;
   };
 
@@ -75,7 +75,7 @@
       <div class="ambient ambient-two" aria-hidden="true"></div>
       <div class="site-shell">
         <header class="site-header">
-          <a class="brand" href="${pageUrl("index/")}" aria-label="QwQ 홈"><span class="brand-mark">Q<span class="brand-dot">.</span></span><span class="brand-copy">QwQ<span class="brand-sub">/ SECURITY NOTES</span></span></a>
+          <a class="brand" href="${pageUrl("index/")}" aria-label="QwQ 홈"><span class="brand-mark"><img src="${url("profile.png")}" alt=""></span><span class="brand-copy">QwQ<span class="brand-sub">/ SECURITY NOTES</span></span></a>
           <nav class="nav" aria-label="주 메뉴"></nav>
           <span class="header-status"><span class="status-light"></span> ONLINE</span>
         </header>
@@ -168,6 +168,7 @@
 
   function projectCard(name, project, detailLabel) {
     const card = el("article", "project-card");
+    if (project.highlight === true) card.classList.add("highlight");
     const trigger = el("div", "project-trigger");
     trigger.setAttribute("role", "button");
     trigger.tabIndex = 0;
@@ -213,6 +214,7 @@
 
   function achievementCard(name, achievement) {
     const card = el("article", "project-card achievement-card");
+    if (achievement.highlight === true) card.classList.add("highlight");
     const row = el("div", "achievement-row");
     const trigger = el("div", "achievement-info");
     trigger.setAttribute("role", "button");
