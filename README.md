@@ -1,4 +1,4 @@
-# QwQP0 블로그
+# QwQ 블로그
 
 GitHub Pages용 정적 사이트입니다. 빌드 과정이나 외부 서비스 없이 `main` 브랜치의 루트에서 배포할 수 있습니다.
 
@@ -20,7 +20,7 @@ GitHub Pages용 정적 사이트입니다. 빌드 과정이나 외부 서비스 
 
 ## GitHub Pages
 
-저장소가 `QwQP0.github.io`이면 GitHub Pages의 **Deploy from a branch → main → /(root)**로 설정하세요. 배포 주소는 [https://qwqp0.github.io/](https://qwqp0.github.io/)입니다. `/index/`는 메인 페이지로 이동하며 `/projects/`, `/contact/`도 사용할 수 있습니다.
+GitHub 계정과 저장소 이름은 `QwQP0`이고, 블로그에 표시하는 닉네임은 `QwQ`입니다. GitHub Pages는 **Deploy from a branch → main → /(root)**로 설정되어 있습니다. 배포 주소는 [https://qwqp0.github.io/](https://qwqp0.github.io/)입니다. `/index/`는 메인 페이지로 이동하며 `/projects/`, `/contact/`도 사용할 수 있습니다.
 
 로컬에서는 파일을 직접 열면 JSON 로딩이 제한될 수 있습니다. 정적 HTTP 서버로 미리보기 하세요. 예: `npx serve .`
 

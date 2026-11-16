@@ -64,12 +64,12 @@
       <div class="ambient ambient-two" aria-hidden="true"></div>
       <div class="site-shell">
         <header class="site-header">
-          <a class="brand" href="${url("")}" aria-label="QwQP0 홈"><span class="brand-mark">Q<span class="brand-dot">.</span></span><span class="brand-copy">QwQP0<span class="brand-sub">/ PERSONAL ARCHIVE</span></span></a>
+          <a class="brand" href="${url("")}" aria-label="QwQ 홈"><span class="brand-mark">Q<span class="brand-dot">.</span></span><span class="brand-copy">QwQ<span class="brand-sub">/ SECURITY NOTES</span></span></a>
           <nav class="nav" aria-label="주 메뉴"></nav>
           <span class="header-status"><span class="status-light"></span> ONLINE</span>
         </header>
         <main id="main-content"></main>
-        <footer class="site-footer"><span>© <span id="year"></span> QwQP0</span><span>BUILT FOR THE OPEN WEB <span class="footer-star">✦</span></span></footer>
+        <footer class="site-footer"><span>© <span id="year"></span> QwQ</span><span>LEARNING SECURITY, ONE NOTE AT A TIME <span class="footer-star">✦</span></span></footer>
       </div>`;
     const navNode = root.querySelector(".nav");
     for (const [key, label, path] of nav) {
@@ -99,18 +99,18 @@
         <div class="hero-orbit orbit-a" aria-hidden="true"></div>
         <div class="hero-orbit orbit-b" aria-hidden="true"></div>
         <div class="hero-content">
-          <p class="eyebrow"><span class="eyebrow-line"></span> WELCOME TO MY SPACE <span class="eyebrow-index">001 / 003</span></p>
-          <h1 id="hero-title">Ideas into<br><em>reality.</em></h1>
-          <p class="hero-korean">만들고, 탐구하고, 기록합니다.</p>
+          <p class="eyebrow"><span class="eyebrow-line"></span> SECURITY NOTES <span class="eyebrow-index">001 / 003</span></p>
+          <h1 id="hero-title">Learn.<br><em>Verify.</em></h1>
+          <p class="hero-korean">정보보안을 공부하는 학생 QwQ의 기록.</p>
           <a class="primary-button" href="${url("projects/")}">프로젝트 보기 <span aria-hidden="true">↗</span></a>
         </div>
         <div class="hero-side" aria-hidden="true">SCROLL TO EXPLORE <span>↓</span></div>
-        <div class="hero-bottom" aria-hidden="true"><span>QwQP0 / ARCHIVE</span><span>EST. 2026</span></div>
+        <div class="hero-bottom" aria-hidden="true"><span>QwQ / ARCHIVE</span><span>LEARNING IN PROGRESS</span></div>
       </section>
       <section class="section about-section" aria-labelledby="about-title">
-        <div class="section-heading"><span class="section-number">01 / ABOUT</span><h2 id="about-title">안녕하세요<span class="accent">.</span></h2><p>ABOUT ME</p></div>
+        <div class="section-heading"><span class="section-number">01 / ABOUT</span><h2 id="about-title">QwQ입니다<span class="accent">.</span></h2><p>ABOUT ME</p></div>
         <div class="about-grid">
-          <div class="profile-frame"><div class="profile-corner top-left"></div><div class="profile-corner bottom-right"></div><img class="profile-image" src="${url("profile.png")}" alt="QwQP0 프로필 사진"><span class="profile-label">PROFILE_01</span></div>
+          <div class="profile-frame"><div class="profile-corner top-left"></div><div class="profile-corner bottom-right"></div><img class="profile-image" src="${url("profile.png")}" alt="QwQ 프로필 사진"><span class="profile-label">PROFILE_01</span></div>
           <div class="about-copy"><p class="small-label">A LITTLE INTRODUCTION</p><div id="description" class="description"></div><a class="text-link" href="${url("contact/")}">연락처 보기 <span aria-hidden="true">↗</span></a></div>
         </div>
       </section>
@@ -118,7 +118,7 @@
         <div class="section-heading"><span class="section-number">02 / TIMELINE</span><h2 id="timeline-title">지나온 길<span class="accent">.</span></h2><p>EXPERIENCE & MILESTONES</p></div>
         <div id="timeline" class="timeline"></div>
       </section>
-      <section class="closing"><div><span class="small-label">WHAT'S NEXT?</span><h2>함께 만들 이야기가<br>있다면<span class="accent">.</span></h2></div><a class="primary-button" href="${url("contact/")}">연락하기 <span aria-hidden="true">↗</span></a></section>`;
+      <section class="closing"><div><span class="small-label">LET'S CONNECT</span><h2>보안과 프로젝트에 관해<br>이야기하고 싶다면<span class="accent">.</span></h2></div><a class="primary-button" href="${url("contact/")}">연락하기 <span aria-hidden="true">↗</span></a></section>`;
 
     const profile = main.querySelector(".profile-image");
     profile.addEventListener("error", () => {
@@ -199,7 +199,7 @@
 
   async function projects(main) {
     main.innerHTML = `
-      <section class="page-intro"><div class="page-intro-glow" aria-hidden="true"></div><p class="eyebrow"><span class="eyebrow-line"></span> THE WORK <span class="eyebrow-index">002 / 003</span></p><h1>Projects<span class="accent">.</span></h1><p>아이디어가 결과물이 되기까지의 기록.</p><span class="page-intro-mark" aria-hidden="true">P/</span></section>
+      <section class="page-intro"><div class="page-intro-glow" aria-hidden="true"></div><p class="eyebrow"><span class="eyebrow-line"></span> THE WORK <span class="eyebrow-index">002 / 003</span></p><h1>Projects<span class="accent">.</span></h1><p>공부하며 진행한 프로젝트를 정리합니다.</p><span class="page-intro-mark" aria-hidden="true">P/</span></section>
       <section class="section projects-section" aria-label="프로젝트 목록">
         <div class="project-toolbar"><div><span class="small-label">ARCHIVE / SELECTED WORK</span><p class="toolbar-title"><strong id="project-count">0</strong>개의 프로젝트</p></div><div class="filter-wrap"><button id="filter-button" class="filter-button" type="button" aria-expanded="false" aria-controls="filter-panel">태그 필터 <span id="filter-count"></span><span aria-hidden="true" class="filter-chevron">⌄</span></button><div id="filter-panel" class="filter-panel" hidden><label class="filter-search-label" for="tag-search">태그 검색</label><input id="tag-search" type="search" placeholder="태그 찾기" autocomplete="off"><div id="tag-options" class="tag-options"></div><p class="filter-help">여러 태그를 선택하면 하나라도 포함된 프로젝트가 표시됩니다.</p></div></div></div>
         <div id="active-filters" class="active-filters" aria-live="polite"></div><div id="project-list" class="project-list"></div><p id="no-results" class="empty-note" hidden>선택한 태그에 해당하는 프로젝트가 없습니다.</p>
@@ -280,8 +280,8 @@
 
   async function contact(main) {
     main.innerHTML = `
-      <section class="page-intro"><div class="page-intro-glow" aria-hidden="true"></div><p class="eyebrow"><span class="eyebrow-line"></span> SAY HELLO <span class="eyebrow-index">003 / 003</span></p><h1>Contact<span class="accent">.</span></h1><p>이야기를 나누고 싶다면 아래 채널에서 만나요.</p><span class="page-intro-mark" aria-hidden="true">C/</span></section>
-      <section class="section contact-section"><div class="section-heading"><span class="section-number">CONNECT / ONLINE</span><h2>어디서든<span class="accent">.</span></h2><p>FIND ME ON THE WEB</p></div><div id="contact-list" class="contact-list"></div></section>`;
+      <section class="page-intro"><div class="page-intro-glow" aria-hidden="true"></div><p class="eyebrow"><span class="eyebrow-line"></span> SAY HELLO <span class="eyebrow-index">003 / 003</span></p><h1>Contact<span class="accent">.</span></h1><p>질문이나 피드백이 있다면 편하게 연락해 주세요.</p><span class="page-intro-mark" aria-hidden="true">C/</span></section>
+      <section class="section contact-section"><div class="section-heading"><span class="section-number">CONNECT / ONLINE</span><h2>연락처<span class="accent">.</span></h2><p>FIND ME ON THE WEB</p></div><div id="contact-list" class="contact-list"></div></section>`;
     let data;
     try { data = await loadJson("contact.json"); }
     catch { main.querySelector("#contact-list").append(errorNotice("연락처를 불러오지 못했습니다. contact.json을 확인해 주세요.")); return; }
