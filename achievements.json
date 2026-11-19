@@ -80,6 +80,14 @@
       {"desc": "", "rank": "1위", "date": "2026.07.19"}
     ]
   },
+  "OpenProject CVE": {
+    "desc": "CVE-2026-52779(2026.06.09)",
+    "tags": ["CVE", "OpenSource"],
+    "highlight": false,
+    "achv": [
+      {"desc": "moderate", "rank": "1", "date": ""}
+    ]
+  },
   "Hypersonic CTF 2026": {
     "desc": "Team: SHA",
     "tags": ["CTF", "Jeopardy"],
