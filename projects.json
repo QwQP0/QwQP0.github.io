@@ -24,7 +24,7 @@
       " - [GHSA-fv8m-h8hc-57gq](https://github.com/opf/openproject/security/advisories/GHSA-fv8m-h8hc-57gq)"
     ],
     "start": "2026.05",
-    "end" : "2026.06"
+    "end" : "2026.06",
     "highlight": false,
     "tags": ["CVE", "OpenSource"]
   }
