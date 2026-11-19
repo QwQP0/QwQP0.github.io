@@ -1,6 +1,13 @@
 {
   "방탈출 CTF 개최 및 운영": {
-    "desc": ["'주말에 뭐하세요? 바쁘세요? 해결해 주실 수 있나요?'"],
+    "desc": [
+      "['주말에 뭐하세요? 바쁘세요? 해결해 주실 수 있나요?'](https://blog.hspace.io/posts/roomescape-ctf-part-1/)",
+      "운영 총괄(PM) 및 메인 의뢰 담당",
+      "워게임 출제",
+      " - 메인 의뢰 7개",
+      " - 서브 의뢰 5개",
+      " - (방탈출 문제 9개...)"
+    ],
     "start": "2026.07",
     "end": "2026.09",
     "highlight": true,
@@ -16,7 +23,8 @@
       " - [GHSA-vhfq-8mwf-g79w](https://github.com/opf/openproject/security/advisories/GHSA-vhfq-8mwf-g79w)",
       " - [GHSA-fv8m-h8hc-57gq](https://github.com/opf/openproject/security/advisories/GHSA-fv8m-h8hc-57gq)"
     ],
-    "start": "2026.06",
+    "start": "2026.05",
+    "end" : "2026.06"
     "highlight": false,
     "tags": ["CVE", "OpenSource"]
   }
