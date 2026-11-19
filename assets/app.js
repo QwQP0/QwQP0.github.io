@@ -11,7 +11,7 @@
   };
   const pageUrl = (path) => {
     const target = new URL(path, base);
-    target.searchParams.set("v", "20261117-achstatic1");
+    target.searchParams.set("v", "20261120-projectlines1");
     return target.href;
   };
 
@@ -182,8 +182,10 @@
     top.append(el("span", "project-arrow", "↗"));
     const cleanTags = entryTags(project);
     const heading = headingWithTags(name, cleanTags);
-    const text = String(project.desc || "");
-    const [firstLine, ...rest] = text.split(/\r?\n/);
+    const lines = Array.isArray(project.desc)
+      ? project.desc.filter((line) => typeof line === "string")
+      : String(project.desc || "").split(/\r?\n/);
+    const [firstLine = "", ...rest] = lines;
     const preview = el("p", "project-preview");
     appendLinkedText(preview, firstLine);
     trigger.append(top, heading, preview);

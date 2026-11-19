@@ -1,14 +1,21 @@
 {
   "방탈출 CTF 개최 및 운영": {
-    "desc": "'주말에 뭐하세요? 바쁘세요? 해결해 주실 수 있나요?'",
+    "desc": ["'주말에 뭐하세요? 바쁘세요? 해결해 주실 수 있나요?'"],
     "start": "2026.07",
     "end": "2026.09",
     "highlight": true,
     "tags": ["CTF", "Organizer", "Author"]
-  }
+  },
   "OpenProject 기여": {
-    "desc": "Openproject 보안 취약점 탐색\nReporter\n - [GHSA-jrx5-px3f-vfq4](https://github.com/opf/openproject/security/advisories/GHSA-jrx5-px3f-vfq4) - [CVE-2026-52779](https://nvd.nist.gov/vuln/detail/cve-2026-52779)\n - [GHSA-37p6-x463-m62x](https://github.com/opf/openproject/security/advisories/GHSA-37p6-x463-m62x)\nFinder\n - [GHSA-vhfq-8mwf-g79w](https://github.com/opf/openproject/security/advisories/GHSA-vhfq-8mwf-g79w)\n - [GHSA-fv8m-h8hc-57gq](https://github.com/opf/openproject/security/advisories/GHSA-fv8m-h8hc-57gq)",
-    "start": "2026.05",
+    "desc": [
+      "Openproject 보안 취약점 탐색",
+      "Reporter",
+      " - [GHSA-jrx5-px3f-vfq4](https://github.com/opf/openproject/security/advisories/GHSA-jrx5-px3f-vfq4) - [CVE-2026-52779](https://nvd.nist.gov/vuln/detail/cve-2026-52779)",
+      " - [GHSA-37p6-x463-m62x](https://github.com/opf/openproject/security/advisories/GHSA-37p6-x463-m62x)",
+      "Finder",
+      " - [GHSA-vhfq-8mwf-g79w](https://github.com/opf/openproject/security/advisories/GHSA-vhfq-8mwf-g79w)",
+      " - [GHSA-fv8m-h8hc-57gq](https://github.com/opf/openproject/security/advisories/GHSA-fv8m-h8hc-57gq)"
+    ],
     "start": "2026.06",
     "highlight": false,
     "tags": ["CVE", "OpenSource"]
