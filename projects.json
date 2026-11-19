@@ -1,15 +1,16 @@
 {
-  "샘플 프로젝트 — 교체해 주세요": {
-    "desc": "프로젝트의 한 줄 요약이 여기에 표시됩니다.\n두 번째 줄부터는 카드를 클릭했을 때 보입니다. 링크 예시: [GitHub](https://github.com)",
-    "start": "2025.08",
-    "end": "2025.10",
+  "방탈출 CTF 개최 및 운영": {
+    "desc": "'주말에 뭐하세요? 바쁘세요? 해결해 주실 수 있나요?'",
+    "start": "2026.07",
+    "end": "2026.09",
     "highlight": true,
-    "tags": ["Web", "JavaScript"]
-  },
-  "진행 중인 프로젝트 예시": {
-    "desc": "종료일이 없는 프로젝트는 시작일 뒤에 ~가 표시됩니다.\n이 부분에 개발 과정이나 성과를 적을 수 있습니다.",
-    "start": "2026.01",
-    "highlight": true,
-    "tags": ["Security", "Web"]
+    "tags": ["CTF", "Organizer", "Author"]
+  }
+  "OpenProject 기여": {
+    "desc": "Openproject 보안 취약점 탐색\nReporter\n - [GHSA-jrx5-px3f-vfq4](https://github.com/opf/openproject/security/advisories/GHSA-jrx5-px3f-vfq4) - [CVE-2026-52779](https://nvd.nist.gov/vuln/detail/cve-2026-52779)\n - [GHSA-37p6-x463-m62x](https://github.com/opf/openproject/security/advisories/GHSA-37p6-x463-m62x)\nFinder\n - [GHSA-vhfq-8mwf-g79w](https://github.com/opf/openproject/security/advisories/GHSA-vhfq-8mwf-g79w)\n - [GHSA-fv8m-h8hc-57gq](https://github.com/opf/openproject/security/advisories/GHSA-fv8m-h8hc-57gq)",
+    "start": "2026.05",
+    "start": "2026.06",
+    "highlight": false,
+    "tags": ["CVE", "OpenSource"]
   }
 }
