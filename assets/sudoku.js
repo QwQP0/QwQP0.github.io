@@ -10,7 +10,7 @@ let leftblank;  // 남은 빈칸 수
 let starttime=new Date();  // 게임 시작 시시작
 const difficultySelect=document.getElementById("sudoku-difficulty");
 const requestedDifficulty=new URLSearchParams(location.search).get("difficulty");
-const currentDifficulty=["EASY", "NORMAL", "HARD"].includes(requestedDifficulty) ? requestedDifficulty : "HARD";
+const currentDifficulty=["EASY", "NORMAL", "HARD", "EXTREME"].includes(requestedDifficulty) ? requestedDifficulty : "HARD";
 difficultySelect.value=currentDifficulty;
 document.getElementById("level").innerText=`SUDOKU-${currentDifficulty}`;
 difficultySelect.addEventListener("change", () => {
@@ -59,7 +59,7 @@ switch(currentDifficulty) {
     case "HARD":
         diff=45;
         break;
-    default:
+    case "EXTREME":
         diff=50;
         break;
 }

@@ -591,7 +591,9 @@ function KeyboardControl(event) {
   if([32,37,38,39,40].includes(event.which)) event.preventDefault();
   
   if(event.which==27) {
+    if(event.repeat) return;
     game_pause=!game_pause;
+    document.getElementById("tetris-paused").hidden = !game_pause;
     
     if(game_pause) {
       clearInterval(update);
