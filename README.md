@@ -57,7 +57,9 @@ GitHub Pages용 정적 사이트입니다. 빌드 과정이나 외부 서비스 
 
 ## GitHub Pages
 
-GitHub 계정과 저장소 이름은 `QwQP0`이고, 블로그에 표시하는 닉네임은 `QwQ`입니다. GitHub Pages는 **Deploy from a branch → main → /(root)**로 설정되어 있습니다. 배포 주소는 [https://qwqp0.github.io/](https://qwqp0.github.io/)입니다. `/index/`, `/projects/`, `/achievements/`, `/contact/`를 사용할 수 있으며 `/project/`도 프로젝트 페이지로 열립니다.
+GitHub 계정과 저장소 이름은 `QwQP0`이고, 블로그에 표시하는 닉네임은 `QwQ`입니다. GitHub Pages는 **Deploy from a branch → main → /(root)**로 설정되어 있습니다. 배포 주소는 [https://qwqp0.github.io/](https://qwqp0.github.io/)입니다. `/index/`, `/projects/`, `/achievements/`, `/contact/`, `/+/`를 사용할 수 있으며 `/project/`도 프로젝트 페이지로 열립니다.
+
+`/+/`에서는 Tetris와 Sudoku를 실행할 수 있습니다. Sudoku의 난이도 선택 메뉴는 쉬움·보통·어려움으로 구성되며, 선택하면 해당 난이도의 새 게임을 엽니다.
 
 로컬에서는 파일을 직접 열면 JSON 로딩이 제한될 수 있습니다. 정적 HTTP 서버로 미리보기 하세요. 예: `npx serve .`
 

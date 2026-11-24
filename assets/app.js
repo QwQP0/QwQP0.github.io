@@ -11,7 +11,7 @@
   };
   const pageUrl = (path) => {
     const target = new URL(path, base);
-    target.searchParams.set("v", "20261120-projectlines1");
+    target.searchParams.set("v", "20261124-plus1");
     return target.href;
   };
 
@@ -72,7 +72,8 @@
       ["home", "HOME", "index/"],
       ["projects", "PROJECTS", "projects/"],
       ["achievements", "ACHIEVEMENTS", "achievements/"],
-      ["contact", "CONTACT", "contact/"]
+      ["contact", "CONTACT", "contact/"],
+      ["plus", "+", "+/"]
     ];
     root.innerHTML = `
       <div class="ambient ambient-one" aria-hidden="true"></div>
@@ -385,6 +386,36 @@
     });
   }
 
+  function plus(main) {
+    const game = document.documentElement.dataset.game;
+    main.classList.add("content-main", "plus-main");
+    if (!game) {
+      main.innerHTML = `
+        <section class="content-intro"><h1>Playground<span class="accent">.</span></h1><p>테트리스와 스도쿠를 플레이할 수 있습니다.</p></section>
+        <div class="plus-grid">
+          <a class="plus-card" href="${pageUrl("+/tetris/")}"><span>TETRIS</span><strong>Tetris</strong><span>블록을 쌓아 줄을 지우는 게임</span></a>
+          <a class="plus-card" href="${pageUrl("+/sudoku/")}"><span>SUDOKU</span><strong>Sudoku</strong><span>9×9 숫자 퍼즐</span></a>
+        </div>`;
+    } else if (game === "tetris") {
+      main.innerHTML = `
+        <a class="game-back" href="${pageUrl("+/")}">← Playground</a>
+        <section class="game-heading"><h1>Tetris<span class="accent">.</span></h1></section>
+        <div class="tetris-layout">
+          <aside class="tetris-side"><div id="holdblock_div" class="game-panel"><span class="game-label">HOLD</span><div id="holdblock_img" class="block-preview"></div></div><p class="game-keys">← → 이동<br>↑ 회전 · ↓ 내리기<br>Space 바로 놓기 · Z 홀드<br>Esc 일시정지</p></aside>
+          <div class="tetris-board-wrap"><table id="tetris_field" aria-label="테트리스 게임판"></table><div id="tetris-ready" class="game-overlay"><strong>PRESS ANY KEY</strong><span>아무 키나 눌러 시작</span></div><div id="game_over_div" class="game-overlay"><strong>GAME OVER</strong><span id="tetris-final-score"></span></div></div>
+          <aside class="tetris-side"><div id="nextblock_div" class="game-panel"><span class="game-label">NEXT</span><div id="nextblock_img" class="block-preview"></div></div><div class="game-panel"><span class="game-label">SCORE</span><p id="score">0</p></div></aside>
+        </div>`;
+    } else if (game === "sudoku") {
+      main.innerHTML = `
+        <a class="game-back" href="${pageUrl("+/")}">← Playground</a>
+        <section class="game-heading"><h1>Sudoku<span class="accent">.</span></h1></section>
+        <div class="sudoku-layout">
+          <div class="sudoku-board-panel"><div class="sudoku-toolbar"><p id="level"><b>SUDOKU-HARD</b></p><p id="playtime">00:00:00.000</p><button id="reset_btn" type="button" title="입력한 숫자 초기화">RESET</button></div><div id="field_div"><table id="field" aria-label="스도쿠 게임판"></table></div></div>
+          <aside class="sudoku-side"><div class="game-panel"><label class="game-label" for="sudoku-difficulty">난이도</label><select id="sudoku-difficulty"><option value="EASY">쉬움</option><option value="NORMAL">보통</option><option value="HARD">어려움</option></select></div><div id="record_div" class="game-panel"><span class="game-label">BEST TIME</span><table id="record"><tr><th>NAME</th><th>RECORD</th><th>DATE</th></tr></table></div></aside>
+        </div><div id="pause_popup"></div><div id="clear_popup" class="game-overlay"><h1>CLEAR!</h1><h3 id="clear-time">Time :</h3></div>`;
+    }
+  }
+
   const main = shell();
   const descPromise = loadJson("desc.json");
   descPromise.then((value) => {
@@ -392,5 +423,6 @@
   }).catch(() => {});
   if (page === "projects" || page === "achievements") projectListing(main, page);
   else if (page === "contact") contact(main);
+  else if (page === "plus") plus(main);
   else home(main, descPromise);
 })();
