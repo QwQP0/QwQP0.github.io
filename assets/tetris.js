@@ -582,6 +582,8 @@ function ViewScore(ds) {
 
 function KeyboardControl(event) {
   if(!started) {
+    if (event.repeat || !["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) return;
+    event.preventDefault();
     started=true;
     document.getElementById("tetris-ready").hidden=true;
     Update();

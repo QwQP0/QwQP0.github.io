@@ -25,7 +25,7 @@ document.onkeydown=function(event) {
         InsertNum(event);
         return;
     }
-    if (event.repeat || event.key === "Tab") return;
+    if (event.repeat || event.key !== "Enter") return;
     event.preventDefault();
     StartGame();
 };
