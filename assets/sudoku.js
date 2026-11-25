@@ -8,20 +8,24 @@ let leftblank;  // 남은 빈칸 수
 let starttime=null;
 let timerId;
 const difficultySelect=document.getElementById("sudoku-difficulty");
-const requestedDifficulty=new URLSearchParams(location.search).get("difficulty");
-const currentDifficulty=["EASY", "NORMAL", "HARD", "EXTREME"].includes(requestedDifficulty) ? requestedDifficulty : "HARD";
-difficultySelect.value=currentDifficulty;
-document.getElementById("level").innerText=`SUDOKU-${currentDifficulty}`;
+const blankCounts=new Map([["EASY", 32], ["NORMAL", 37], ["HARD", 45], ["EXTREME", 50]]);
+let diff;
 difficultySelect.addEventListener("change", () => {
-    location.search=`?difficulty=${difficultySelect.value}`;
+    const url=new URL(location.href);
+    url.searchParams.set("difficulty", difficultySelect.value);
+    history.pushState(null, "", url);
+    preparePuzzle();
+    difficultySelect.blur();
 });
+window.addEventListener("popstate", preparePuzzle);
 
 document.onkeydown=function(event) {
+    if (event.target.closest("a, button, select")) return;
     if (starttime !== null) {
         InsertNum(event);
         return;
     }
-    if (event.repeat || event.key === "Tab" || event.target.closest("a, button, select")) return;
+    if (event.repeat || event.key === "Tab") return;
     event.preventDefault();
     StartGame();
 };
@@ -52,36 +56,35 @@ for(let i=0;i<9;i++) {
     field.appendChild(tr);
 }
 
-answer=CreateAnswer();  // 정답 필드 생성
-
-// 문제(빈칸) 생성
-diff=0;
-switch(currentDifficulty) {
-    case "EASY":
-        diff=32;
-        break;
-    case "NORMAL":
-        diff=37;
-        break;
-    case "HARD":
-        diff=45;
-        break;
-    case "EXTREME":
-        diff=50;
-        break;
-}
-
-CreateProblem(diff);
-leftblank=diff;
-
-
 ///////////////////////// 함수 ///////////////////////////
 // 함수 제어용 변수
 let selected=null;
 let insertmode;
 let lastdownkey=null;
 
+preparePuzzle();
+
+function preparePuzzle() {
+    const requested=new URLSearchParams(location.search).get("difficulty");
+    const difficulty=blankCounts.has(requested) ? requested : "HARD";
+    difficultySelect.value=difficulty;
+    diff=blankCounts.get(difficulty);
+    clearInterval(timerId);
+    starttime=null;
+    lastdownkey=null;
+    FocusOff();
+    answer=CreateAnswer();
+    CreateProblem(diff);
+    leftblank=diff;
+    document.getElementById("level").textContent=`SUDOKU-${difficulty}`;
+    document.getElementById("clear_popup").style.scale="";
+    document.getElementById("playtime").textContent="00:00:00.000";
+    document.getElementById("reset_btn").disabled=true;
+    document.getElementById("sudoku-ready").hidden=false;
+}
+
 function CreateAnswer() {
+    const answer=[];
     let visited=[];
     let cnt=[];
     
@@ -183,12 +186,9 @@ function CreateProblem(diff) {
 function WriteField(bitfield) {
     for(let i=0;i<9;i++) {
         for(let j=0;j<9;j++) {
-            if(bitfield[i][j]) {
-                sudoku_field[i][j].textContent="-";
-                sudoku_field[i][j].classList.add("fixed");
-            } else {
-                //sudoku_field[i][j].innerText="0";
-            }
+            const cell=sudoku_field[i][j];
+            cell.classList.toggle("fixed", bitfield[i][j]);
+            cell.replaceChildren(bitfield[i][j] ? "-" : document.createElement("p"));
         }
     }
 }
