@@ -410,8 +410,11 @@
         <a class="game-back" href="${pageUrl("+/")}">← Playground</a>
         <section class="game-heading"><h1>Sudoku<span class="accent">.</span></h1></section>
         <div class="sudoku-layout">
-          <div class="sudoku-board-panel"><div class="sudoku-toolbar"><p id="level"><b>SUDOKU-HARD</b></p><p id="playtime">00:00:00.000</p><button id="reset_btn" type="button" title="입력한 숫자 초기화">RESET</button></div><div id="field_div"><table id="field" aria-label="스도쿠 게임판"></table></div></div>
-          <aside class="sudoku-side"><div class="game-panel"><label class="game-label" for="sudoku-difficulty">난이도</label><select id="sudoku-difficulty"><option value="EASY">쉬움</option><option value="NORMAL">보통</option><option value="HARD">어려움</option><option value="EXTREME">익스트림</option></select></div><div id="record_div" class="game-panel"><span class="game-label">BEST TIME</span><table id="record"><tr><th>NAME</th><th>RECORD</th><th>DATE</th></tr></table></div></aside>
+          <div class="sudoku-board-panel">
+            <div class="sudoku-toolbar"><p id="level"><b>SUDOKU-HARD</b></p><p id="playtime">00:00:00.000</p><button id="reset_btn" type="button" title="입력한 숫자 초기화" disabled>RESET</button></div>
+            <div id="field_div"><table id="field" aria-label="스도쿠 게임판"></table><div id="sudoku-ready" class="game-overlay" role="status"><strong>PRESS ANY KEY</strong><span>아무 키나 눌러 시작</span></div></div>
+          </div>
+          <aside class="sudoku-side"><div class="game-panel"><label class="game-label" for="sudoku-difficulty">난이도</label><select id="sudoku-difficulty"><option value="EASY">쉬움</option><option value="NORMAL">보통</option><option value="HARD">어려움</option><option value="EXTREME">익스트림</option></select></div></aside>
         </div><div id="pause_popup"></div><div id="clear_popup" class="game-overlay"><h1>CLEAR!</h1><h3 id="clear-time">Time :</h3></div>`;
     }
   }

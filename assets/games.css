@@ -9,7 +9,9 @@
 .game-heading h1{margin:0 0 32px;font-size:clamp(58px,6vw,82px);line-height:1;letter-spacing:-.07em}
 .game-panel{padding:18px;border:1px solid var(--line-bright);background:rgba(13,30,38,.8)}
 .game-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;background:rgba(6,14,21,.88);z-index:2}
+[data-game]{--game-magenta:#f5b5d8}
 .game-overlay strong{font-size:34px;letter-spacing:-.05em}.game-overlay span{color:#b9d0ce;font-size:16px}
+#tetris-ready strong,#sudoku-ready strong,#score,#playtime{color:var(--game-magenta)}
 .tetris-layout{display:grid;grid-template-columns:180px 320px 180px;justify-content:center;gap:20px;align-items:start}
 .tetris-side{display:flex;flex-direction:column;gap:16px}.tetris-side .game-panel{min-height:122px}
 .game-keys{margin:0;color:#b9d0ce;font-size:13px;line-height:1.9}
@@ -18,20 +20,20 @@
 .tetris-board-wrap{position:relative;width:320px;height:640px;border:2px solid var(--cyan)}
 #tetris_field{width:100%;height:100%;border-collapse:collapse;table-layout:fixed;background:#0c1b24}
 #tetris_field tr{height:5%}#tetris_field td{width:10%;padding:0;border:1px solid rgba(112,242,227,.12)}
-#score{margin:14px 0 0;color:var(--cyan);font:700 32px var(--mono)}
+#score{margin:14px 0 0;font:700 32px var(--mono)}
 #game_over_div{scale:0 0}#game_over_div h1{margin:0;font-size:36px}#game_over_div h3{margin:0;color:var(--cyan)}
 .sudoku-layout{display:grid;grid-template-columns:minmax(0,600px) minmax(220px,280px);justify-content:center;gap:22px;align-items:start}
 .sudoku-board-panel{min-width:0;padding:18px;border:1px solid var(--line-bright);background:rgba(13,30,38,.8)}
 .sudoku-toolbar{display:flex;align-items:center;gap:20px;margin-bottom:18px}.sudoku-toolbar p{margin:0}
 #level{margin-right:auto;color:var(--cyan);font:500 13px var(--mono)}#playtime{font:500 18px var(--mono)}
 #reset_btn{padding:8px 12px;border:1px solid var(--line-bright);background:#101e27;color:var(--text);font:12px var(--mono)}#reset_btn:hover{border-color:var(--cyan)}
-#field_div{width:100%;aspect-ratio:1}#field{width:100%;height:100%;border:2px solid var(--cyan);border-collapse:collapse;table-layout:fixed}
+#field_div{position:relative;width:100%;aspect-ratio:1}#field{width:100%;height:100%;border:2px solid var(--cyan);border-collapse:collapse;table-layout:fixed}
+#sudoku-ready{background:linear-gradient(to bottom,transparent 30%,rgba(6,14,21,.96) 44% 56%,transparent 70%)}
 #field tr{height:11.111%}#field td{width:11.111%;padding:0;border:1px solid var(--line-bright);background:#0c1b24;color:var(--text);text-align:center;font-size:clamp(22px,2.6vw,36px);font-weight:600;cursor:pointer}
 #field td.fixed{background:#17323a;color:#87cfc6;cursor:default}#field td.selected{background:#214f52;color:var(--cyan)}
 #field td p{margin:0}#field td:hover:not(.fixed){background:#19343b}
 .sudoku-side{display:flex;flex-direction:column;gap:16px}.sudoku-side .game-panel{display:flex;flex-direction:column;gap:12px}
 #sudoku-difficulty{width:100%;padding:11px;border:1px solid var(--line-bright);background:#101e27;color:var(--text);font:14px var(--sans)}
-#record{width:100%;border-collapse:collapse;font:11px var(--mono);color:#b9d0ce}#record th{padding:9px 3px;border-bottom:1px solid var(--line);font-weight:400}
 #clear_popup{position:fixed;inset:auto;top:50%;left:50%;width:min(360px,90vw);height:190px;transform:translate(-50%,-50%);border:2px solid var(--cyan);scale:0 0}
 #clear_popup h1{margin:0;font-size:38px}#clear_popup h3{margin:0;color:var(--cyan);font:16px var(--mono)}
 @media(max-width:850px){.tetris-layout{grid-template-columns:140px 280px 140px}.tetris-board-wrap{width:280px;height:560px}.sudoku-layout{grid-template-columns:1fr}.sudoku-side{display:grid;grid-template-columns:1fr 1fr}}

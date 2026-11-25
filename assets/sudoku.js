@@ -4,10 +4,9 @@ let sudoku_field=[];  // 제어용 필드 변수
 let answer=[];  // 스도쿠 정답 저장 변수
 let memo=[];  // 메모용 변수
 
-let isclear=false;
-
 let leftblank;  // 남은 빈칸 수
-let starttime=new Date();  // 게임 시작 시시작
+let starttime=null;
+let timerId;
 const difficultySelect=document.getElementById("sudoku-difficulty");
 const requestedDifficulty=new URLSearchParams(location.search).get("difficulty");
 const currentDifficulty=["EASY", "NORMAL", "HARD", "EXTREME"].includes(requestedDifficulty) ? requestedDifficulty : "HARD";
@@ -17,7 +16,15 @@ difficultySelect.addEventListener("change", () => {
     location.search=`?difficulty=${difficultySelect.value}`;
 });
 
-document.onkeydown=InsertNum;  // 키 입력 제어
+document.onkeydown=function(event) {
+    if (starttime !== null) {
+        InsertNum(event);
+        return;
+    }
+    if (event.repeat || event.key === "Tab" || event.target.closest("a, button, select")) return;
+    event.preventDefault();
+    StartGame();
+};
 document.getElementById("reset_btn").onclick=ResetField  // 리셋 버튼
 
 for(let i=0;i<9;i++) {
@@ -66,8 +73,6 @@ switch(currentDifficulty) {
 
 CreateProblem(diff);
 leftblank=diff;
-
-setInterval(Update, 4);
 
 
 ///////////////////////// 함수 ///////////////////////////
@@ -179,7 +184,7 @@ function WriteField(bitfield) {
     for(let i=0;i<9;i++) {
         for(let j=0;j<9;j++) {
             if(bitfield[i][j]) {
-                sudoku_field[i][j].innerText=""+answer[i][j];
+                sudoku_field[i][j].textContent="-";
                 sudoku_field[i][j].classList.add("fixed");
             } else {
                 //sudoku_field[i][j].innerText="0";
@@ -188,6 +193,19 @@ function WriteField(bitfield) {
     }
 }
 
+
+function StartGame() {
+    for (let row=0; row<9; row++) {
+        for (let col=0; col<9; col++) {
+            const cell=sudoku_field[row][col];
+            if (cell.classList.contains("fixed")) cell.textContent=answer[row][col];
+        }
+    }
+    document.getElementById("sudoku-ready").hidden=true;
+    document.getElementById("reset_btn").disabled=false;
+    starttime=Date.now();
+    timerId=setInterval(Update, 16);
+}
 
 function ResetField() {
     for(let i=0;i<9;i++) {
@@ -246,7 +264,9 @@ function PopupClear() {
     
     clear_popup=document.getElementById("clear_popup");
     clear_popup.style.scale="1 1";
+    clearInterval(timerId);
     Update();
+    document.getElementById("clear-time").textContent=document.getElementById("playtime").textContent;
 }
 
 
@@ -257,6 +277,7 @@ function PopupPause() {
 
 ////////// 이벤트 함수 //////////
 function onClickCell(event) {
+    if (starttime === null) return;
     if(this.classList.contains("fixed")) {
         FocusOff();
         return;
@@ -360,40 +381,6 @@ function FocusOff() {
 
 
 function Update() {
-    if(isclear==true) {
-        return;
-    }
-    
-    playtime=document.getElementById("playtime");
-    dt=new Date((new Date()).getTime()-starttime.getTime());
-    
-    playtime.innerText="";
-    
-    if(dt.getUTCHours()<10) {
-        playtime.innerText+="0";
-    }
-    playtime.innerText+=(dt.getUTCHours()+":");
-    
-    if(dt.getMinutes()<10) {
-        playtime.innerText+="0";
-    }
-    playtime.innerText+=(dt.getMinutes()+":");
-    
-    if(dt.getSeconds()<10) {
-        playtime.innerText+="0";
-    }
-    playtime.innerText+=(dt.getSeconds()+".");
-    
-    if(dt.getMilliseconds()<10) {
-        playtime.innerText+="00";
-    } else if(dt.getMilliseconds()<10) {
-        playtime.innerText+="0";
-    }
-    playtime.innerText+=(dt.getMilliseconds()+":");
-    
-    document.getElementById("clear-time").innerText=playtime.innerText;
-    
-    if(document.getElementById("clear_popup").style.scale=='1') {
-        isclear=true;
-    }
+    const elapsed=new Date(Date.now()-starttime);
+    document.getElementById("playtime").textContent=elapsed.toISOString().slice(11, 23);
 }
